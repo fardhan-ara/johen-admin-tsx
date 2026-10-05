@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Staf | Johen Gaming</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="dashboard-staf" data-breadcrumb="Home > Dashboard Staf">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Dashboard Staf</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Filter Staf ── -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-body" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <label class="form-label" for="pilihStaf" style="margin:0;white-space:nowrap;font-weight:600">Pilih Nama Anda:</label>
+      <select id="pilihStaf" class="form-control" style="width:220px">
+        <option value="">— Pilih Nama Anda —</option>
+        <option value="1">Staf Admin 1</option>
+        <option value="2">Staf Admin 2</option>
+        <option value="3">Staf Admin 3</option>
+        <option value="4">Staf Admin 4</option>
+        <option value="5">Staf Admin 5</option>
+        <option value="6">Staf Admin 6</option>
+        <option value="7">Staf Admin 7</option>
+        <option value="8">Staf Admin 8</option>
+        <option value="9">Staf Admin 9</option>
+      </select>
+      <div id="labelProfil" style="display:none;padding:6px 14px;background:var(--surface-2);border-radius:var(--radius);font-size:13px;color:var(--text-secondary)">
+        <strong id="labelNama" style="color:var(--text)"></strong>
+        <span id="labelKoord"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Stat Cards ── -->
+  <div class="row col-4" id="statCards" style="margin-bottom:16px;display:none">
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Total Antrean</div>
+          <div class="stat-value-row"><span class="stat-value" id="statTotal">0</span></div>
+          <div class="stat-subtext">transaksi hari ini</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon yellow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Checking</div>
+          <div class="stat-value-row"><span class="stat-value" id="statChecking">0</span></div>
+          <div class="stat-subtext">sedang diverifikasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Secured</div>
+          <div class="stat-value-row"><span class="stat-value" id="statSecured">0</span></div>
+          <div class="stat-subtext">menunggu konfirmasi</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Done</div>
+          <div class="stat-value-row"><span class="stat-value" id="statDone">0</span></div>
+          <div class="stat-subtext">transaksi selesai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Tabel Antrean ── -->
+  <div class="card" id="cardTabel" style="display:none">
+    <div class="card-header">
+      <div>
+        <div class="card-title" id="tabelJudul">Antrean Transaksi</div>
+        <div class="card-subtitle" id="tabelSubjudul">Pilih nama staf untuk melihat data.</div>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-outline btn-sm" id="btnExport">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:40px">#</th>
+              <th>ID Transaksi</th>
+              <th>Store Game</th>
+              <th>Nominal</th>
+              <th>Status</th>
+              <th>Waktu Masuk</th>
+              <th>Catatan</th>
+            </tr>
+          </thead>
+          <tbody id="tabelBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" style="display:none;padding:48px 24px;text-align:center;color:var(--text-muted)">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom:12px;opacity:.4"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <div style="font-size:14px">Tidak ada antrean transaksi untuk staf ini hari ini.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Placeholder sebelum pilih staf ── -->
+  <div id="placeholder" style="padding:64px 24px;text-align:center;color:var(--text-muted)">
+    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom:16px;opacity:.3"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+    <div style="font-size:15px;font-weight:500;margin-bottom:6px">Pilih nama staf Anda</div>
+    <div style="font-size:13px">Antrean transaksi dari store yang ditugaskan akan muncul di sini.</div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+// ── Data penugasan staf → store (rotasi harian simulasi) ──
+// Setiap staf menangani 2-3 store per hari dari total 7 store (A-G)
+const PENUGASAN = {
+  1: ['Store A', 'Store B'],
+  2: ['Store C', 'Store D'],
+  3: ['Store E', 'Store F'],
+  4: ['Store G', 'Store A'],
+  5: ['Store B', 'Store C'],
+  6: ['Store D', 'Store E'],
+  7: ['Store F', 'Store G'],
+  8: ['Store A', 'Store C', 'Store E'],
+  9: ['Store B', 'Store D', 'Store F'],
+};
+
+const KOORDINATOR = (id) => id <= 4 ? 'Koordinator 1' : 'Koordinator 2';
+
+// ── Data transaksi seed (simulasi antrean hari ini) ──
+const STATUS_LIST = ['checking', 'secured', 'done'];
+const STATUS_LABEL = { checking: 'Checking', secured: 'Secured', done: 'Done' };
+const STATUS_CLS   = { checking: 'status-yellow', secured: 'status-blue', done: 'status-green' };
+const STORES = ['Store A', 'Store B', 'Store C', 'Store D', 'Store E', 'Store F', 'Store G'];
+const CATATAN = ['Akun baru', 'Perpanjangan', 'Top-up saldo', 'Ganti password', 'Verifikasi ulang', 'Transfer akun', 'Upgrade paket'];
+
+function pad(n) { return String(n).padStart(2, '0'); }
+function jamAcak(seed) {
+  const h = 8 + (seed * 3) % 10;
+  const m = (seed * 17) % 60;
+  return `${pad(h)}:${pad(m)}`;
+}
+function nominalAcak(seed) {
+  const nilai = [50000, 75000, 100000, 150000, 200000, 250000, 500000];
+  return nilai[seed % nilai.length];
+}
+function formatRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+// Generate 3-4 transaksi per store
+const TRANSAKSI = [];
+let counter = 1;
+STORES.forEach((store, si) => {
+  const jumlah = 3 + (si % 2);
+  for (let i = 0; i < jumlah; i++) {
+    const seed = si * 10 + i;
+    TRANSAKSI.push({
+      id: `TRX-${pad(si + 1)}${pad(i + 1)}-${String(counter).padStart(3, '0')}`,
+      store,
+      nominal: nominalAcak(seed),
+      status: STATUS_LIST[seed % 3],
+      waktu: jamAcak(seed),
+      catatan: CATATAN[seed % CATATAN.length],
+    });
+    counter++;
+  }
+});
+
+// ── DOM refs ──
+const pilihStaf    = document.getElementById('pilihStaf');
+const labelProfil  = document.getElementById('labelProfil');
+const labelNama    = document.getElementById('labelNama');
+const labelKoord   = document.getElementById('labelKoord');
+const statCards    = document.getElementById('statCards');
+const cardTabel    = document.getElementById('cardTabel');
+const placeholder  = document.getElementById('placeholder');
+const tabelBody    = document.getElementById('tabelBody');
+const tabelJudul   = document.getElementById('tabelJudul');
+const tabelSubjudul= document.getElementById('tabelSubjudul');
+const emptyState   = document.getElementById('emptyState');
+const statTotal    = document.getElementById('statTotal');
+const statChecking = document.getElementById('statChecking');
+const statSecured  = document.getElementById('statSecured');
+const statDone     = document.getElementById('statDone');
+
+function render(stafId) {
+  const stores = PENUGASAN[stafId];
+  const rows = TRANSAKSI.filter((t) => stores.includes(t.store));
+
+  // stat counts
+  statTotal.textContent    = rows.length;
+  statChecking.textContent = rows.filter((r) => r.status === 'checking').length;
+  statSecured.textContent  = rows.filter((r) => r.status === 'secured').length;
+  statDone.textContent     = rows.filter((r) => r.status === 'done').length;
+
+  tabelJudul.textContent    = `Antrean Transaksi — Staf Admin ${stafId}`;
+  tabelSubjudul.textContent = `Store ditugaskan: ${stores.join(', ')} · ${rows.length} transaksi hari ini`;
+
+  if (rows.length === 0) {
+    tabelBody.innerHTML = '';
+    emptyState.style.display = 'block';
+  } else {
+    emptyState.style.display = 'none';
+    tabelBody.innerHTML = rows.map((r, i) => `
+      <tr>
+        <td style="color:var(--text-muted);font-size:12px">${i + 1}</td>
+        <td><span style="font-family:monospace;font-size:12.5px;color:var(--text)">${r.id}</span></td>
+        <td>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--primary);flex-shrink:0"></span>
+            ${r.store}
+          </span>
+        </td>
+        <td style="font-weight:600;color:var(--text)">${formatRp(r.nominal)}</td>
+        <td><span class="status ${STATUS_CLS[r.status]}">${STATUS_LABEL[r.status]}</span></td>
+        <td style="font-size:12.5px;color:var(--text-muted)">${r.waktu} WIB</td>
+        <td style="font-size:12.5px;color:var(--text-secondary)">${r.catatan}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+pilihStaf.addEventListener('change', () => {
+  const id = parseInt(pilihStaf.value, 10);
+  if (!id) {
+    labelProfil.style.display = 'none';
+    statCards.style.display   = 'none';
+    cardTabel.style.display   = 'none';
+    placeholder.style.display = 'block';
+    return;
+  }
+
+  // Label profil
+  labelNama.textContent  = `Staf Admin ${id}`;
+  labelKoord.textContent = ` (Di bawah Tanggung Jawab: ${KOORDINATOR(id)})`;
+  labelProfil.style.display = 'inline-flex';
+
+  // Tampilkan section
+  placeholder.style.display = 'none';
+  statCards.style.display   = '';
+  cardTabel.style.display   = '';
+
+  render(id);
+});
+
+// ── Export CSV sederhana ──
+document.getElementById('btnExport').addEventListener('click', () => {
+  const id = parseInt(pilihStaf.value, 10);
+  if (!id) return;
+  const stores = PENUGASAN[id];
+  const rows = TRANSAKSI.filter((t) => stores.includes(t.store));
+  const header = 'ID Transaksi,Store,Nominal,Status,Waktu,Catatan\n';
+  const body = rows.map((r) =>
+    `${r.id},${r.store},${r.nominal},${STATUS_LABEL[r.status]},${r.waktu},${r.catatan}`
+  ).join('\n');
+  const blob = new Blob([header + body], { type: 'text/csv' });
+  const a = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(blob),
+    download: `antrean-staf-${id}-${new Date().toISOString().slice(0, 10)}.csv`
+  });
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+</script>
+
+</body>
+</html>

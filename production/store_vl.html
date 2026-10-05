@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store Valorant | Johen Gaming</title>
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="store-vl" data-breadcrumb="Home > Daftar 8 Store Game > Valorant">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Daftar 8 Store Game</div>
+        <h1 class="page-title">🔴 Valorant</h1>
+      </div>
+      <div class="page-actions">
+        <a href="input-transaksi.html" class="btn btn-primary btn-sm">+ Input Transaksi</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-4" style="margin-bottom:16px">
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+        <div class="stat-content">
+          <div class="stat-label">Total Transaksi</div>
+          <div class="stat-value-row"><span class="stat-value" id="sTotal">0</span></div>
+          <div class="stat-subtext">hari ini</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="stat-content">
+          <div class="stat-label">Checking</div>
+          <div class="stat-value-row"><span class="stat-value" id="sChecking">0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="stat-content">
+          <div class="stat-label">Secured</div>
+          <div class="stat-value-row"><span class="stat-value" id="sSecured">0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="stat-content">
+          <div class="stat-label">Done</div>
+          <div class="stat-value-row"><span class="stat-value" id="sDone">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Transaksi Valorant</div>
+        <div class="card-subtitle">Data transaksi store hari ini</div>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr><th>#</th><th>ID Transaksi</th><th>Staf Admin</th><th>Nominal</th><th>Status</th><th>Waktu</th></tr>
+          </thead>
+          <tbody id="tabelBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+const STATUS_LABEL = { checking: 'Checking', secured: 'Secured', done: 'Done' };
+const STATUS_CLS   = { checking: 'status-yellow', secured: 'status-blue', done: 'status-green' };
+function pad(n) { return String(n).padStart(2, '0'); }
+function formatRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+const NOMINAL = [50000,75000,100000,150000,200000,250000,500000];
+const STATUS  = ['checking','secured','done'];
+const rows = Array.from({length: 5}, (_, i) => ({
+  id: `TRX-VL-${pad(i+1)}-${String(i+1).padStart(3,'0')}`,
+  staf: `Staf Admin ${(i % 5) + 5}`,
+  nominal: NOMINAL[(i+4) % NOMINAL.length],
+  status: STATUS[i % 3],
+  waktu: `${pad(9 + i)}:${pad((i * 23) % 60)} WIB`,
+}));
+
+document.getElementById('sTotal').textContent    = rows.length;
+document.getElementById('sChecking').textContent = rows.filter(r => r.status==='checking').length;
+document.getElementById('sSecured').textContent  = rows.filter(r => r.status==='secured').length;
+document.getElementById('sDone').textContent     = rows.filter(r => r.status==='done').length;
+
+document.getElementById('tabelBody').innerHTML = rows.map((r,i) => `
+  <tr>
+    <td style="color:var(--text-muted);font-size:12px">${i+1}</td>
+    <td><span style="font-family:monospace;font-size:12.5px">${r.id}</span></td>
+    <td>${r.staf}</td>
+    <td style="font-weight:600">${formatRp(r.nominal)}</td>
+    <td><span class="status ${STATUS_CLS[r.status]}">${STATUS_LABEL[r.status]}</span></td>
+    <td style="font-size:12.5px;color:var(--text-muted)">${r.waktu}</td>
+  </tr>`).join('');
+</script>
+
+</body>
+</html>

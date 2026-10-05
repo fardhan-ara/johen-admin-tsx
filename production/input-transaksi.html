@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Transaksi | Johen Gaming</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="form-transaksi" data-breadcrumb="Home > Form Input Transaksi">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Form Input Transaksi</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-8-4">
+
+    <!-- ── Card Form Utama ── -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Input Data Transaksi Akun Game</div>
+          <div class="card-subtitle">Isi semua field dengan benar sebelum menyimpan data.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="formInputTransaksi" novalidate>
+
+          <!-- 1. Nama Staf Admin -->
+          <div class="form-group">
+            <label class="form-label" for="namaStafAdmin">
+              Nama Staf Admin <span class="required">*</span>
+            </label>
+            <select id="namaStafAdmin" class="form-control" required>
+              <option value="">— Pilih Nama Staf Admin —</option>
+              <option value="1">Staf Admin 1</option>
+              <option value="2">Staf Admin 2</option>
+              <option value="3">Staf Admin 3</option>
+              <option value="4">Staf Admin 4</option>
+              <option value="5">Staf Admin 5</option>
+              <option value="6">Staf Admin 6</option>
+              <option value="7">Staf Admin 7</option>
+              <option value="8">Staf Admin 8</option>
+              <option value="9">Staf Admin 9</option>
+            </select>
+            <!-- Keterangan koordinator muncul otomatis via JS -->
+            <div id="infoKoord" style="display:none;margin-top:6px;font-size:12.5px;padding:6px 10px;border-radius:var(--radius);background:var(--surface-2)"></div>
+          </div>
+
+          <!-- 2. Kategori Store Game -->
+          <div class="form-group">
+            <label class="form-label" for="kategoriStore">
+              Kategori Store Game <span class="required">*</span>
+            </label>
+            <select id="kategoriStore" class="form-control" required>
+              <option value="">— Pilih Store Game —</option>
+              <option value="Free Fire">Free Fire</option>
+              <option value="Mobile Legend">Mobile Legend</option>
+              <option value="Johen PUBG">Johen PUBG</option>
+              <option value="Monkey PUBG">Monkey PUBG</option>
+              <option value="Valorant">Valorant</option>
+              <option value="EFootball">EFootball</option>
+              <option value="FC Mobile">FC Mobile</option>
+              <option value="Roblox">Roblox</option>
+            </select>
+          </div>
+
+          <!-- 3. ID Transaksi / ID Akun Game -->
+          <div class="form-group">
+            <label class="form-label" for="idTransaksiAkun">
+              ID Transaksi / ID Akun Game <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="idTransaksiAkun"
+              class="form-control"
+              placeholder="Contoh: TRX-20250601-001 atau ID-AKUN-12345"
+              required
+            >
+            <div class="form-help">Masukkan ID unik transaksi atau ID akun game yang diproses.</div>
+          </div>
+
+          <!-- 4. Detail / Catatan Akun -->
+          <div class="form-group">
+            <label class="form-label" for="catatanAkun">Detail / Catatan Akun</label>
+            <input
+              type="text"
+              id="catatanAkun"
+              class="form-control"
+              placeholder="Contoh: Akun rank Diamond, hero 120, skin rare"
+            >
+            <div class="form-help">Spesifikasi singkat akun game (opsional).</div>
+          </div>
+
+          <!-- 5. Nominal Transaksi -->
+          <div class="form-group">
+            <label class="form-label" for="nominalTransaksi">
+              Nominal Transaksi (Rupiah) <span class="required">*</span>
+            </label>
+            <div class="input-affix">
+              <span class="affix prefix">Rp</span>
+              <input
+                type="text"
+                id="nominalTransaksi"
+                class="form-control"
+                placeholder="0"
+                inputmode="numeric"
+                autocomplete="off"
+                required
+              >
+            </div>
+            <div class="form-help" id="terbilangText" style="min-height:18px;font-style:italic"></div>
+          </div>
+
+          <!-- 6. Status Proses -->
+          <div class="form-group">
+            <label class="form-label" for="statusProses">
+              Status Proses <span class="required">*</span>
+            </label>
+            <select id="statusProses" class="form-control" required>
+              <option value="">— Pilih Status Proses —</option>
+              <option value="checking">Checking</option>
+              <option value="secured">Secured</option>
+              <option value="done">Done</option>
+            </select>
+            <div class="form-help" id="statusHelp" style="min-height:18px"></div>
+          </div>
+
+          <div class="form-actions right">
+            <button type="reset" class="btn btn-secondary btn-sm" style="margin-right:10px">Reset Form</button>
+            <button type="submit" id="btnSubmit" class="btn btn-primary">
+              <svg id="btnIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span id="btnLabel">Submit Transaksi</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Kolom Kanan ── -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Preview Ringkasan -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Ringkasan Input</div>
+        </div>
+        <div class="card-body">
+          <dl style="margin:0;display:flex;flex-direction:column;gap:10px;font-size:13px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <dt style="color:var(--text-secondary);font-weight:400">Staf Admin</dt>
+              <dd id="prvStaf" style="margin:0;font-weight:600;color:var(--text)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <dt style="color:var(--text-secondary);font-weight:400">Store</dt>
+              <dd id="prvStore" style="margin:0;font-weight:600;color:var(--text)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">ID Transaksi</dt>
+              <dd id="prvId" style="margin:0;font-weight:600;color:var(--text);word-break:break-all;text-align:right;font-family:monospace;font-size:12px">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <dt style="color:var(--text-secondary);font-weight:400">Nominal</dt>
+              <dd id="prvNominal" style="margin:0;font-weight:700;color:var(--primary)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Catatan</dt>
+              <dd id="prvCatatan" style="margin:0;font-size:12px;color:var(--text-secondary);text-align:right">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <dt style="color:var(--text-secondary);font-weight:400">Status</dt>
+              <dd id="prvStatus" style="margin:0">
+                <span id="prvStatusBadge" style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:600;background:var(--surface-2);color:var(--text-secondary)">—</span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Panduan Status -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Panduan Status Proses</div>
+        </div>
+        <div class="card-body">
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;font-size:12.5px;line-height:1.6">
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;margin-top:4px"></span>
+              <span><strong style="color:var(--text)">Checking</strong><br><span style="color:var(--text-secondary)">Akun sedang dalam proses verifikasi oleh staf.</span></span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></span>
+              <span><strong style="color:var(--text)">Secured</strong><br><span style="color:var(--text-secondary)">Akun telah diamankan, menunggu konfirmasi koordinator.</span></span>
+            </li>
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:4px"></span>
+              <span><strong style="color:var(--text)">Done</strong><br><span style="color:var(--text-secondary)">Transaksi selesai dan akun telah diserahkan ke pembeli.</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+import { showToast } from '/src/v4/toast.js';
+
+// ── URL Google Apps Script Web App ────────────────────────────────────────
+// Tempel URL deployment Apps Script Anda di sini setelah di-deploy.
+// Contoh: 'https://script.google.com/macros/s/AKfycb.../exec'
+const SPREADSHEET_API_URL = '';
+
+// ── Refs ──────────────────────────────────────────────────────────────────
+const elStaf    = document.getElementById('namaStafAdmin');
+const elStore   = document.getElementById('kategoriStore');
+const elId      = document.getElementById('idTransaksiAkun');
+const elCatatan = document.getElementById('catatanAkun');
+const elNominal = document.getElementById('nominalTransaksi');
+const elStatus  = document.getElementById('statusProses');
+const btnSubmit = document.getElementById('btnSubmit');
+const btnLabel  = document.getElementById('btnLabel');
+const btnIcon   = document.getElementById('btnIcon');
+
+const infoKoord    = document.getElementById('infoKoord');
+const terbilangEl  = document.getElementById('terbilangText');
+const statusHelp   = document.getElementById('statusHelp');
+const prvStaf        = document.getElementById('prvStaf');
+const prvStore       = document.getElementById('prvStore');
+const prvId          = document.getElementById('prvId');
+const prvCatatan     = document.getElementById('prvCatatan');
+const prvNominal     = document.getElementById('prvNominal');
+const prvStatusBadge = document.getElementById('prvStatusBadge');
+
+// ── 1. Staf Admin → keterangan koordinator ───────────────────────────────
+elStaf.addEventListener('change', () => {
+  const n = parseInt(elStaf.value, 10);
+  if (!n) { infoKoord.style.display = 'none'; prvStaf.textContent = '—'; return; }
+  infoKoord.textContent = n <= 4
+    ? '🟢 Di bawah tanggung jawab: Koordinator 1'
+    : '🔵 Di bawah tanggung jawab: Koordinator 2';
+  infoKoord.style.color   = n <= 4 ? 'var(--green)' : 'var(--blue)';
+  infoKoord.style.display = 'block';
+  prvStaf.textContent = elStaf.options[elStaf.selectedIndex].text;
+});
+
+// ── 2. Store preview ─────────────────────────────────────────────────────
+elStore.addEventListener('change', () => {
+  prvStore.textContent = elStore.value ? elStore.options[elStore.selectedIndex].text : '—';
+});
+
+// ── 3. ID preview ────────────────────────────────────────────────────────
+elId.addEventListener('input', () => { prvId.textContent = elId.value.trim() || '—'; });
+
+// ── 3b. Catatan preview ───────────────────────────────────────────────────
+elCatatan.addEventListener('input', () => { prvCatatan.textContent = elCatatan.value.trim() || '—'; });
+
+// ── 4. Nominal — format Rupiah + terbilang ───────────────────────────────
+elNominal.addEventListener('input', () => {
+  const raw = elNominal.value.replace(/\D/g, '');
+  const num = parseInt(raw, 10) || 0;
+  elNominal.value = num ? num.toLocaleString('id-ID') : '';
+  terbilangEl.textContent = num ? terbilang(num) + ' rupiah' : '';
+  prvNominal.textContent  = num ? 'Rp ' + num.toLocaleString('id-ID') : '—';
+});
+
+// ── 5. Status → badge warna ──────────────────────────────────────────────
+const STATUS_CFG = {
+  checking: { bg: 'var(--yellow)', label: 'Checking', help: 'Akun sedang diverifikasi.' },
+  secured:  { bg: 'var(--blue)',   label: 'Secured',  help: 'Akun diamankan, menunggu konfirmasi.' },
+  done:     { bg: 'var(--green)',  label: 'Done',     help: 'Transaksi selesai.' }
+};
+elStatus.addEventListener('change', () => {
+  const cfg = STATUS_CFG[elStatus.value];
+  if (cfg) {
+    prvStatusBadge.textContent      = cfg.label;
+    prvStatusBadge.style.background = cfg.bg;
+    prvStatusBadge.style.color      = '#fff';
+    statusHelp.textContent          = cfg.help;
+  } else {
+    prvStatusBadge.textContent      = '—';
+    prvStatusBadge.style.background = 'var(--surface-2)';
+    prvStatusBadge.style.color      = 'var(--text-secondary)';
+    statusHelp.textContent          = '';
+  }
+});
+
+// ── Reset ────────────────────────────────────────────────────────────────
+document.getElementById('formInputTransaksi').addEventListener('reset', () => {
+  infoKoord.style.display         = 'none';
+  terbilangEl.textContent         = '';
+  statusHelp.textContent          = '';
+  prvStaf.textContent             = '—';
+  prvStore.textContent            = '—';
+  prvId.textContent               = '—';
+  prvCatatan.textContent          = '—';
+  prvNominal.textContent          = '—';
+  prvStatusBadge.textContent      = '—';
+  prvStatusBadge.style.background = 'var(--surface-2)';
+  prvStatusBadge.style.color      = 'var(--text-secondary)';
+  document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+});
+
+// ── Tombol loading state ──────────────────────────────────────────────────
+const SPINNER = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+  style="margin-right:5px;animation:spin .7s linear infinite"
+  ><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`;
+const SAVE_ICON = btnIcon.outerHTML;
+
+function setLoading(on) {
+  btnSubmit.disabled = on;
+  if (on) {
+    btnSubmit.innerHTML = SPINNER + '<span>Mengirim...</span>';
+  } else {
+    btnSubmit.innerHTML = SAVE_ICON + '<span id="btnLabel">Submit Transaksi</span>';
+  }
+}
+
+// ── submitTransaksi() — fungsi utama pengiriman data ─────────────────────
+// Dipanggil oleh event submit form. Bisa juga dipanggil manual:
+//   submitTransaksi()  → dari konsol browser untuk testing
+async function submitTransaksi() {
+  // Validasi semua field wajib
+  const fields = [elStaf, elStore, elId, elNominal, elStatus];
+  let valid = true;
+  fields.forEach(f => {
+    const empty = !f.value.trim();
+    f.classList.toggle('is-invalid', empty);
+    if (empty) valid = false;
+  });
+  if (!valid) {
+    showToast('Harap isi semua field yang wajib diisi.', { variant: 'warning' });
+    return;
+  }
+
+  // Susun payload yang akan dikirim ke Google Spreadsheet
+  const nominalRaw = parseInt(elNominal.value.replace(/\D/g, ''), 10) || 0;
+  const stafN      = parseInt(elStaf.value, 10);
+  const payload = {
+    timestamp:        new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }),
+    namaStaf:         elStaf.options[elStaf.selectedIndex].text,
+    koordinator:      stafN <= 4 ? 'Koordinator 1' : 'Koordinator 2',
+    storeGame:        elStore.value,
+    idTransaksi:      elId.value.trim(),
+    catatanAkun:      elCatatan.value.trim(),
+    nominal:          nominalRaw,
+    nominalFormatted: 'Rp ' + nominalRaw.toLocaleString('id-ID'),
+    statusProses:     elStatus.value
+  };
+
+  // Log payload ke konsol untuk debugging
+  console.group('[submitTransaksi] Payload:');
+  console.table([payload]);
+  console.groupEnd();
+
+  // Jika SPREADSHEET_API_URL belum diisi → mode lokal
+  if (!SPREADSHEET_API_URL) {
+    console.warn('[submitTransaksi] SPREADSHEET_API_URL kosong — data tidak dikirim ke sheet.');
+    showToast('✅ Transaksi berhasil disimpan! (mode lokal — URL API belum diisi)', { variant: 'success' });
+    document.getElementById('formInputTransaksi').reset();
+    return;
+  }
+
+  // Kirim ke Google Apps Script via Fetch API (POST, no-cors)
+  setLoading(true);
+  try {
+    await fetch(SPREADSHEET_API_URL, {
+      method:  'POST',
+      mode:    'no-cors',   // GAS Web App tidak mengirim CORS header
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+    // mode no-cors → response.type === 'opaque', status tidak bisa dibaca.
+    // Anggap sukses selama tidak ada network error (tidak throw).
+    showToast('✅ Data transaksi berhasil dikirim ke Google Spreadsheet!', { variant: 'success' });
+    document.getElementById('formInputTransaksi').reset();
+  } catch (err) {
+    console.error('[submitTransaksi] Fetch error:', err);
+    showToast('❌ Gagal mengirim data. Periksa koneksi internet atau URL API.', { variant: 'danger' });
+  } finally {
+    setLoading(false);
+  }
+}
+
+// Hubungkan fungsi ke event submit form
+document.getElementById('formInputTransaksi').addEventListener('submit', (e) => {
+  e.preventDefault();
+  submitTransaksi();
+});
+
+// ── Animasi spinner ───────────────────────────────────────────────────────
+const styleEl = document.createElement('style');
+styleEl.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(styleEl);
+
+// ── Terbilang (s/d ratusan miliar) ───────────────────────────────────────
+function terbilang(n) {
+  const sat = ['','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan',
+    'sepuluh','sebelas','dua belas','tiga belas','empat belas','lima belas','enam belas',
+    'tujuh belas','delapan belas','sembilan belas'];
+  const pul = ['','','dua puluh','tiga puluh','empat puluh','lima puluh',
+    'enam puluh','tujuh puluh','delapan puluh','sembilan puluh'];
+  if (n < 20)   return sat[n];
+  if (n < 100)  return pul[Math.floor(n/10)] + (n%10 ? ' '+sat[n%10] : '');
+  if (n < 200)  return 'seratus'  + (n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 1000) return sat[Math.floor(n/100)]+' ratus'+(n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 2000) return 'seribu'   + (n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e6)  return terbilang(Math.floor(n/1000))+' ribu' +(n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e9)  return terbilang(Math.floor(n/1e6)) +' juta' +(n%1e6  ? ' '+terbilang(n%1e6)  : '');
+  return           terbilang(Math.floor(n/1e9))+' miliar'    +(n%1e9  ? ' '+terbilang(n%1e9)  : '');
+}
+</script>
+
+</body>
+</html>

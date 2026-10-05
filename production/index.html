@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Monitor | Johen Gaming</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="dashboard" data-breadcrumb="Home > Dashboard Monitor">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Koordinator Admin</div>
+        <h1 class="page-title">Dashboard Monitor</h1>
+      </div>
+      <div class="page-actions">
+        <span id="clockDisplay" style="font-size:13px;color:var(--text-secondary);padding:6px 12px;background:var(--surface-2);border-radius:var(--radius);font-variant-numeric:tabular-nums"></span>
+        <button class="btn btn-outline btn-sm" id="btnRefresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          Refresh Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ROW 1: KPI UTAMA PENJUALAN & 8 STORE ── -->
+  <div class="row col-3" style="margin-bottom:16px">
+    
+    <!-- 1. Total Akun Terjual -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Total Akun Terjual (Sold)</div>
+          <div class="stat-value-row">
+            <span class="stat-value" id="kpiTotal">0</span>
+            <span class="stat-change up" id="kpiTotalChange">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3M3 6l3-3 3 3"/></svg>live
+            </span>
+          </div>
+          <div class="stat-subtext" id="kpiTotalSub">dari 8 store game aktif</div>
+        </div>
+        <div class="stat-spark" id="sparkTotal"></div>
+      </div>
+    </div>
+
+    <!-- 2. Total Harga Laku (Terjual) -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Total Harga Laku (Terjual)</div>
+          <div class="stat-value-row">
+            <span class="stat-value" id="kpiNominal" style="font-size:18px">Rp 0</span>
+          </div>
+          <div class="stat-subtext" id="kpiNominalSub">Akumulasi realisasi 8 store</div>
+        </div>
+        <div class="stat-spark" id="sparkNominal"></div>
+      </div>
+    </div>
+
+    <!-- 3. Jumlah 8 Store Aktif -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Jumlah Store Aktif</div>
+          <div class="stat-value-row">
+            <span class="stat-value">8</span>
+            <span class="stat-change up">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3M3 6l3-3 3 3"/></svg>100%
+            </span>
+          </div>
+          <div class="stat-subtext" title="Free Fire · Mobile Legend · Johen PUBG · Monkey PUBG · Valorant · EFootball · FC Mobile · Roblox">FF · ML · JP · MP · VL · EF · FC · RB</div>
+        </div>
+        <div class="stat-spark" title="8 Store Game Aktif">
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Free Fire"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Mobile Legend"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Johen PUBG"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Monkey PUBG"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Valorant"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="EFootball"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="FC Mobile"></div>
+          <div class="bar" style="height:100%;background:var(--primary);opacity:.85" title="Roblox"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ROW 2: KEY DATA REKAP SOLD (HARGA AKUN, PIC / SUB PIC, & BANK) ── -->
+  <div class="row col-3" style="margin-bottom:16px">
+
+    <!-- Card 1: Total Harga Akun (Listing/Pasang Awal) -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Total Harga Akun (Listing)</div>
+          <div class="stat-value-row">
+            <span class="stat-value" id="kpiHargaAkun" style="font-size:18px">Rp 0</span>
+          </div>
+          <div class="stat-subtext" id="kpiHargaAkunSub">nilai pasang awal sebelum deal</div>
+        </div>
+        <div style="padding:0 16px 12px">
+          <div class="progress-thin"><div class="bar" style="width:100%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: PIC & Channel Penjualan (Sub PIC) -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon purple" style="color:#a855f7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Channel Penjualan (Sub PIC & PIC)</div>
+          <div class="stat-value-row">
+            <span class="stat-value" id="kpiPic" style="font-size:16px;color:#a855f7">Live 0 · Saluran 0</span>
+          </div>
+          <div class="stat-subtext" id="kpiPicSub">PIC: Host Live 1, 2, 3 & Saluran</div>
+        </div>
+        <div style="padding:0 16px 12px">
+          <div class="progress-thin"><div class="bar" id="barPic" style="width:0%;background:#a855f7"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Status Shift On-Duty -->
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon" style="background:color-mix(in srgb,#f59e0b 15%,transparent);color:#f59e0b">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Status Shift On-Duty</div>
+          <div class="stat-value-row">
+            <span class="stat-value" id="kpiShiftLabel" style="font-size:17px">Pagi</span>
+            <span id="kpiShiftBadge" style="font-size:11px;background:color-mix(in srgb,#f59e0b 15%,transparent);color:#f59e0b;padding:2px 9px;border-radius:20px;margin-left:8px;font-weight:600">08:00–15:00</span>
+          </div>
+          <div class="stat-subtext" id="kpiShiftSub">4 staf on-duty · Ganti shift 15:00 WIB</div>
+        </div>
+        <div style="padding:0 16px 12px">
+          <div class="progress-thin"><div class="bar" id="barShift" style="width:0%;background:#f59e0b"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LEADERBOARD (SORTED DESC) + JADWAL LIBUR ADMIN ── -->
+  <div class="row col-2" style="margin-bottom:16px;align-items:start">
+
+    <!-- Kiri: Leaderboard Chart (sorted terbanyak → terendah) -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Leaderboard Performa Staf</div>
+          <div class="card-subtitle">
+            <span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px">
+              <span style="width:9px;height:9px;border-radius:2px;background:#22c55e;display:inline-block"></span> Koordinator 1
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:5px">
+              <span style="width:9px;height:9px;border-radius:2px;background:#3b82f6;display:inline-block"></span> Koordinator 2
+            </span>
+          </div>
+        </div>
+        <span id="leaderboardTotal" style="font-size:11px;color:var(--text-muted)"></span>
+      </div>
+      <div class="chart-area" style="height:220px">
+        <div data-chart="johen-leaderboard" style="width:100%;height:100%"></div>
+      </div>
+    </div>
+
+    <!-- Kanan: Jadwal Libur Admin -->
+    <div class="card">
+      <div class="card-header" style="padding-bottom:10px">
+        <div>
+          <div class="card-title">Jadwal Libur Admin</div>
+          <div class="card-subtitle" id="jadwalSubtitle">Jadwal libur 14 hari ke depan</div>
+        </div>
+        <div style="display:flex;gap:5px;flex-shrink:0">
+          <button id="btnJadwalSemua" style="font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid;cursor:pointer;font-weight:600;transition:all .15s">Semua</button>
+          <button id="btnJadwalPagi"  style="font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid;cursor:pointer;font-weight:600;transition:all .15s">☀ Pagi</button>
+          <button id="btnJadwalSiang" style="font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid;cursor:pointer;font-weight:600;transition:all .15s">🌙 Siang</button>
+        </div>
+      </div>
+      <div style="overflow-y:auto;max-height:186px">
+        <table class="table" id="jadwalTable" style="font-size:12px">
+          <thead>
+            <tr>
+              <th>Nama Staf</th>
+              <th>Shift</th>
+              <th>Tanggal Libur</th>
+              <th>Hari</th>
+            </tr>
+          </thead>
+          <tbody id="jadwalBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LIVE FEED TABLE REKAP SOLD (8 STORE) ── -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Live Feed Penjualan Akun — 8 Store Game</div>
+        <div class="card-subtitle" id="feedSubtitle">Memuat data transaksi...</div>
+      </div>
+      <div class="page-actions">
+        <!-- Filter 8 Store -->
+        <select class="form-control" id="filterStore" style="width:150px;height:32px">
+          <option value="">Semua 8 Store</option>
+          <option value="Free Fire">Free Fire</option>
+          <option value="Mobile Legend">Mobile Legend</option>
+          <option value="Johen PUBG">Johen PUBG</option>
+          <option value="Monkey PUBG">Monkey PUBG</option>
+          <option value="Valorant">Valorant</option>
+          <option value="EFootball">EFootball</option>
+          <option value="FC Mobile">FC Mobile</option>
+          <option value="Roblox">Roblox</option>
+        </select>
+        
+        <!-- Filter Sub PIC Sesuai Rekap Sold -->
+        <select class="form-control" id="filterSubPic" style="width:140px;height:32px">
+          <option value="">Semua Sub PIC</option>
+          <option value="Live">Live</option>
+          <option value="Saluran">Saluran</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Influencer">Influencer</option>
+          <option value="Offline">Offline</option>
+        </select>
+
+        <!-- Filter Bank -->
+        <select class="form-control" id="filterBank" style="width:120px;height:32px">
+          <option value="">Semua Bank</option>
+          <option value="QRIS">QRIS</option>
+          <option value="BRI">BRI</option>
+        </select>
+
+        <button class="btn btn-outline btn-sm" id="btnExportFeed">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table" id="feedTable">
+          <thead>
+            <tr>
+              <th style="width:36px">#</th>
+              <th>ID Transaksi</th>
+              <th>Store Game</th>
+              <th>Nickname & Spek Akun</th>
+              <th>Harga Akun</th>
+              <th>Harga Laku</th>
+              <th>Sub PIC</th>
+              <th>PIC (Host/PIC)</th>
+              <th>Staf Admin</th>
+              <th>Bank</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody id="feedBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+// ── 8 Store Game Johen Gaming ──────────────────────────────────────────────
+const STORES = [
+  'Free Fire',
+  'Mobile Legend',
+  'Johen PUBG',
+  'Monkey PUBG',
+  'Valorant',
+  'EFootball',
+  'FC Mobile',
+  'Roblox'
+];
+
+// Warna badge dot per store
+const STORE_COLORS = {
+  'Free Fire':     '#f97316', // Orange
+  'Mobile Legend': '#3b82f6', // Blue
+  'Johen PUBG':    '#eab308', // Yellow
+  'Monkey PUBG':   '#10b981', // Emerald
+  'Valorant':      '#ef4444', // Red
+  'EFootball':     '#8b5cf6', // Purple
+  'FC Mobile':     '#06b6d4', // Cyan
+  'Roblox':        '#ec4899'  // Pink
+};
+
+const STAF = Array.from({ length: 9 }, (_, i) => `Staf Admin ${i + 1}`);
+
+// Pool Sub PIC & PIC sesuai form-sold
+const SUB_PIC_OPTIONS = ['Live', 'Saluran', 'Instagram', 'Influencer', 'Offline'];
+const HOST_LIVE_LIST  = ['Host Live 1', 'Host Live 2', 'Host Live 3'];
+
+// Pool data realistis akun game per store
+const GAME_ITEMS = {
+  'Free Fire': [
+    { nick: 'RajaHeadshot',   spek: 'Old Season 2, Bundle Hip Hop, MP40 Cobra' },
+    { nick: 'SultanEvo_FF',   spek: 'SG OPM, Scar Megalodon, AK Dragon' },
+    { nick: 'GhostHunter',    spek: 'Bundle Samurai Zombie, Gloo Wall Langka' },
+    { nick: 'ProSniper_ID',   spek: 'Full Elite Pass S1-S5, Badges 500+' }
+  ],
+  'Mobile Legend': [
+    { nick: 'SultanML99',     spek: 'Mythic Glory, 3 Skin Collector, WR 66%' },
+    { nick: 'LancelotGod',    spek: 'Skin KOF Chou & Gusion, Hero 124' },
+    { nick: 'FannyDarat',     spek: 'Skin Lightborn Full Squad, WR 70%' },
+    { nick: 'SkyWalker_ML',   spek: 'Mythical Immortal, 600+ Skin Total' }
+  ],
+  'Johen PUBG': [
+    { nick: 'JohenSniper',    spek: 'M416 Glacier Lv.6, Helm Inferno' },
+    { nick: 'PUBG_Conqueror', spek: 'Set Mumi Kuning, X-Suit Pharaoh' },
+    { nick: 'RushHour_PUBG',  spek: 'Akm Glacier Max, Set Fool Bape' },
+    { nick: 'WinnerWinner',   spek: 'AWM Godzilla Lv.4, Jeep Aegis' }
+  ],
+  'Monkey PUBG': [
+    { nick: 'MonkeyKing_ID',  spek: 'X-Suit Poseidon Lv.4, M4 Fool' },
+    { nick: 'BananaPro99',    spek: 'Conqueror C1S2, M4 Glacier Lv.5' },
+    { nick: 'ApeSquad_Pro',   spek: 'Bape Hoodie Full, UAZ Aegis Lv.3' },
+    { nick: 'PrimateRush',    spek: 'Set Godzilla, Kar98 Moon Rabbit' }
+  ],
+  'Valorant': [
+    { nick: 'JettMain#ID1',   spek: 'Vandal Prime, Phantom Oni, Knife Reaver' },
+    { nick: 'ReynaGod#SEA',   spek: 'Kuronami Vandal, Champion Karambit' },
+    { nick: 'OmenSmoke#007',  spek: 'Reaver Vandal, Sovereign Sword, Dia 2' },
+    { nick: 'RadiantAim#99',  spek: 'Araxis Vandal, Glitchpop Dagger' }
+  ],
+  'EFootball': [
+    { nick: 'MessiGOAT_EF',   spek: 'Squad 3160, Epic Booster Messi 105' },
+    { nick: 'CR7AlNassr',     spek: 'Full BigTime & ShowTime, Squad 3120' },
+    { nick: 'MasterPes24',    spek: 'Epic Vieira, Gullit, Rummenigge' },
+    { nick: 'TikiTaka_Club',  spek: 'Full Epic FC Barcelona All-Time' }
+  ],
+  'FC Mobile': [
+    { nick: 'GalacticosFC',   spek: 'OVR 105, R9, Gullit, Maldini, Zidane' },
+    { nick: 'PaceMonster_FC', spek: 'OVR 103, Mbappe 102, Haaland UTOTS' },
+    { nick: 'SultanFCM',      spek: 'OVR 106, Icon Zidane 105, Cech 104' },
+    { nick: 'TOTS_Champion',  spek: 'Full UTOTS Squad, Skill Points Max' }
+  ],
+  'Roblox': [
+    { nick: 'BloxFruitKing',  spek: 'Max Lv, Kitsune Perm, V4 Race Full' },
+    { nick: 'PetSimX_Whale',  spek: 'Huge Titanic Cat, 250M Gems' },
+    { nick: 'DaHoodPro_ID',   spek: 'Limited Valkyrie Helm, Korblox Leg' },
+    { nick: 'Robloxian_Old',  spek: 'Headless Horseman, Dominus Rex' }
+  ]
+};
+
+// Preset harga akun listing vs harga laku (real deal)
+const PRICE_TIERS = [
+  { akun: 250000,  laku: 250000 },
+  { akun: 350000,  laku: 300000 },
+  { akun: 500000,  laku: 450000 },
+  { akun: 650000,  laku: 580000 },
+  { akun: 850000,  laku: 750000 },
+  { akun: 1000000, laku: 900000 },
+  { akun: 1350000, laku: 1200000 },
+  { akun: 1800000, laku: 1600000 }
+];
+
+function pad(n) { return String(n).padStart(2, '0'); }
+function formatRp(n) { return 'Rp ' + Number(n).toLocaleString('id-ID'); }
+
+function waktuAcak(seed) {
+  const h = 8 + (seed * 3) % 10, m = (seed * 17) % 60;
+  return `${pad(h)}:${pad(m)}`;
+}
+
+// ── Inisialisasi 32 transaksi awal (4 per masing-masing 8 store) ─────────────
+const TRANSAKSI = [];
+let counter = 1;
+
+STORES.forEach((store, si) => {
+  const items = GAME_ITEMS[store] || [];
+  for (let i = 0; i < 4; i++) {
+    const seed = si * 10 + i;
+    const stafIdx = (si * 4 + i) % 9;
+    const tier = PRICE_TIERS[(si + i) % PRICE_TIERS.length];
+    const item = items[i % items.length] || { nick: `Akun-${store}-${i+1}`, spek: 'Spek siap pakai' };
+    const bank = (seed % 3 === 0) ? 'BRI' : 'QRIS';
+
+    // Sub PIC & PIC
+    const subPic = SUB_PIC_OPTIONS[seed % SUB_PIC_OPTIONS.length];
+    const pic = subPic === 'Live' ? HOST_LIVE_LIST[seed % HOST_LIVE_LIST.length] : (subPic === 'Saluran' ? 'PIC Saluran' : `PIC ${subPic}`);
+
+    TRANSAKSI.push({
+      id: `TRX-${store.slice(0, 2).toUpperCase()}-${pad(si + 1)}${pad(i + 1)}-${String(counter).padStart(3, '0')}`,
+      store,
+      staf: STAF[stafIdx],
+      stafIdx,
+      subPic,
+      pic,
+      nickname: item.nick,
+      spek: item.spek,
+      hargaAkun: tier.akun,
+      hargaLaku: tier.laku,
+      bank,
+      waktu: waktuAcak(seed),
+      isNew: false
+    });
+    counter++;
+  }
+});
+
+// ── Hitung performa staf (jumlah akun terjual & omset harga laku per staf) ───
+function hitungPerforma() {
+  const counts = Array(9).fill(0);
+  const omset  = Array(9).fill(0);
+  TRANSAKSI.forEach(t => {
+    counts[t.stafIdx]++;
+    omset[t.stafIdx] += t.hargaLaku;
+  });
+  return { counts, omset };
+}
+
+// ── Update KPI Cards (Harga Akun, Harga Laku, Sub PIC & Bank) ───────────────
+function updateKPI(rows) {
+  const totalAkun       = rows.length;
+  const totalHargaLaku  = rows.reduce((s, r) => s + r.hargaLaku, 0);
+  const totalHargaAkun  = rows.reduce((s, r) => s + r.hargaAkun, 0);
+  
+  // PIC & Sub PIC metrics
+  const liveCount       = rows.filter(r => r.subPic === 'Live').length;
+  const saluranCount    = rows.filter(r => r.subPic === 'Saluran').length;
+  const igCount         = rows.filter(r => r.subPic === 'Instagram').length;
+  const liveRate        = totalAkun > 0 ? (liveCount / totalAkun * 100).toFixed(0) : '0';
+
+  const qrisCount       = rows.filter(r => r.bank === 'QRIS').length;
+  const briCount        = rows.filter(r => r.bank === 'BRI').length;
+  const qrisRate        = totalAkun > 0  ? (qrisCount / totalAkun * 100).toFixed(0) : '0';
+  const briRate         = totalAkun > 0  ? (briCount / totalAkun * 100).toFixed(0) : '0';
+
+  // Row 1: KPI Utama
+  document.getElementById('kpiTotal').textContent       = totalAkun;
+  document.getElementById('kpiTotalSub').textContent    = `dari 8 store game aktif`;
+  document.getElementById('kpiNominal').textContent     = formatRp(totalHargaLaku);
+  document.getElementById('kpiNominalSub').textContent  = `Akumulasi realisasi 8 store`;
+
+  // Row 2: Key Data Rekap Sold (Harga Akun, Sub PIC & Bank)
+  document.getElementById('kpiHargaAkun').textContent   = formatRp(totalHargaAkun);
+  document.getElementById('kpiHargaAkunSub').textContent= `nilai pasang awal sebelum deal`;
+
+  document.getElementById('kpiPic').textContent         = `Live: ${liveCount} · Saluran: ${saluranCount} · IG: ${igCount}`;
+  document.getElementById('kpiPicSub').textContent      = `${liveRate}% via Live · Host Live 1, 2, 3 aktif`;
+  document.getElementById('barPic').style.width         = `${liveRate}%`;
+
+  // ── Shift On-Duty card update ─────────────────────────
+  updateShiftCard();
+
+  // Sparkline total
+  const spark = document.getElementById('sparkTotal');
+  if (spark) {
+    spark.innerHTML = '';
+    const storeCounts = STORES.map(s => rows.filter(r => r.store === s).length);
+    const maxVal = Math.max(...storeCounts, 1);
+    storeCounts.forEach((cnt, idx) => {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.title = `${STORES[idx]}: ${cnt} akun`;
+      bar.style.cssText = `height:${Math.max(20, (cnt / maxVal) * 100)}%;background:var(--primary);opacity:.85`;
+      spark.appendChild(bar);
+    });
+  }
+}
+
+// ── Render Tabel Feed Penjualan ─────────────────────────────────────────────
+let filterStore  = '';
+let filterSubPic = '';
+let filterBank   = '';
+
+function visibleRows() {
+  return TRANSAKSI.filter(r =>
+    (!filterStore  || r.store  === filterStore) &&
+    (!filterSubPic || r.subPic === filterSubPic) &&
+    (!filterBank   || r.bank   === filterBank)
+  );
+}
+
+function renderFeed() {
+  const rows = visibleRows();
+  const omsetLaku = rows.reduce((s, r) => s + r.hargaLaku, 0);
+  document.getElementById('feedSubtitle').textContent =
+    `${rows.length} akun terjual · Total omset laku: ${formatRp(omsetLaku)} · Diperbarui ${new Date().toLocaleTimeString('id-ID')}`;
+
+  document.getElementById('feedBody').innerHTML = rows.map((r, i) => {
+    const storeColor = STORE_COLORS[r.store] || 'var(--primary)';
+
+    // Sub PIC Chip color
+    let subPicBg = 'var(--surface-2)';
+    let subPicColor = 'var(--text-secondary)';
+    if (r.subPic === 'Live') {
+      subPicBg = 'color-mix(in srgb, #a855f7 18%, transparent)';
+      subPicColor = '#a855f7';
+    } else if (r.subPic === 'Saluran') {
+      subPicBg = 'color-mix(in srgb, var(--primary) 18%, transparent)';
+      subPicColor = 'var(--primary)';
+    } else if (r.subPic === 'Instagram') {
+      subPicBg = 'color-mix(in srgb, #ec4899 18%, transparent)';
+      subPicColor = '#ec4899';
+    }
+
+    return `
+    <tr${r.isNew ? ' style="animation:fadeIn .6s ease"' : ''}>
+      <td style="color:var(--text-muted);font-size:12px">${i + 1}</td>
+      <td><span style="font-family:monospace;font-size:12px;font-weight:600">${r.id}</span></td>
+      <td>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600">
+          <span style="width:8px;height:8px;border-radius:50%;background:${storeColor};flex-shrink:0"></span>
+          ${r.store}
+        </span>
+      </td>
+      <td>
+        <div style="font-weight:600;font-size:13px;color:var(--text)">${r.nickname}</div>
+        <div style="font-size:11.5px;color:var(--text-secondary);max-width:230px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${r.spek}">
+          ${r.spek}
+        </div>
+      </td>
+      <td style="font-size:12.5px;color:var(--text-secondary)">${formatRp(r.hargaAkun)}</td>
+      <td style="font-weight:700;color:var(--green)">${formatRp(r.hargaLaku)}</td>
+      <td>
+        <span class="chip" style="background:${subPicBg};color:${subPicColor};font-weight:600;font-size:11px">
+          ${r.subPic}
+        </span>
+      </td>
+      <td>
+        <span style="font-size:12px;font-weight:500;color:var(--text)">
+          ${r.pic}
+        </span>
+      </td>
+      <td>
+        <div class="cell-customer">
+          <div class="cell-avatar" style="background:${r.stafIdx < 4 ? 'var(--green)' : 'var(--blue)'};width:24px;height:24px;font-size:10px;flex-shrink:0">
+            ${r.stafIdx + 1}
+          </div>
+          <span style="font-size:12.5px">${r.staf}</span>
+        </div>
+      </td>
+      <td>
+        <span class="chip" style="background:${r.bank === 'QRIS' ? 'color-mix(in srgb, var(--primary) 15%, transparent)' : 'color-mix(in srgb, var(--blue) 15%, transparent)'};color:${r.bank === 'QRIS' ? 'var(--primary)' : 'var(--blue)'};font-weight:600;font-size:11px">
+          ${r.bank}
+        </span>
+      </td>
+      <td style="font-size:12px;color:var(--text-muted);white-space:nowrap">${r.waktu} WIB</td>
+    </tr>
+    `;
+  }).join('');
+
+  updateKPI(TRANSAKSI);
+}
+
+document.getElementById('filterStore').addEventListener('change', e => { filterStore = e.target.value; renderFeed(); });
+document.getElementById('filterSubPic').addEventListener('change', e => { filterSubPic = e.target.value; renderFeed(); });
+document.getElementById('filterBank').addEventListener('change', e => { filterBank = e.target.value; renderFeed(); });
+document.getElementById('btnRefresh').addEventListener('click', () => { addNewTransaction(); renderFeed(); updateChart(); });
+
+// ── ECharts Leaderboard Performa Staf ───────────────────────────────────────
+let chartInstance = null;
+
+async function mountChart() {
+  const el = document.querySelector('[data-chart="johen-leaderboard"]');
+  if (!el) return;
+
+  const [
+    echartsCore,
+    { BarChart },
+    { GridComponent, TooltipComponent },
+    { CanvasRenderer }
+  ] = await Promise.all([
+    import('echarts/core'),
+    import('echarts/charts'),
+    import('echarts/components'),
+    import('echarts/renderers')
+  ]);
+  echartsCore.use([BarChart, GridComponent, TooltipComponent, CanvasRenderer]);
+
+  const buildOption = () => {
+    const cs = getComputedStyle(document.documentElement);
+    const textMuted   = cs.getPropertyValue('--text-muted').trim();
+    const text        = cs.getPropertyValue('--text').trim();
+    const borderLight = cs.getPropertyValue('--border-color-light').trim();
+    const bgSurface   = cs.getPropertyValue('--bg-surface').trim();
+    const fontFamily  = "'Inter', -apple-system, sans-serif";
+
+    const { counts, omset } = hitungPerforma();
+    // Sort staf dari terbanyak → terendah
+    const sortedIdx = counts.map((_, i) => i).sort((a, b) => counts[b] - counts[a]);
+    const labels      = sortedIdx.map(i => `Staf ${i + 1}`);
+    const sortedCnts  = sortedIdx.map(i => counts[i]);
+    const sortedOmset = sortedIdx.map(i => omset[i]);
+    const colors      = sortedIdx.map(i => i < 4 ? '#22c55e' : '#3b82f6');
+
+    // Update leaderboard total badge
+    const lbTotal = document.getElementById('leaderboardTotal');
+    if (lbTotal) lbTotal.textContent = `Total: ${counts.reduce((s,v)=>s+v,0)} akun`;
+
+    return {
+      textStyle: { fontFamily, fontSize: 11, color: textMuted },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        backgroundColor: bgSurface,
+        borderColor: borderLight,
+        borderWidth: 1,
+        padding: [8, 12],
+        textStyle: { color: text, fontSize: 12, fontFamily },
+        extraCssText: 'box-shadow:0 2px 8px rgba(30,38,51,.08);border-radius:6px;',
+        formatter: params => {
+          const p  = params[0];
+          const si = p.dataIndex;           // posisi dalam array sorted
+          const oi = sortedIdx[si];         // indeks staf asli
+          const koordLabel = oi < 4 ? 'Koordinator 1' : 'Koordinator 2';
+          return `<strong>${STAF[oi]}</strong> (${koordLabel})<br>Total Terjual: <strong>${p.value} Akun</strong><br>Omset Harga Laku: <strong>${formatRp(sortedOmset[si])}</strong>`;
+        }
+      },
+      grid: { left: 68, right: 36, top: 10, bottom: 6, containLabel: false },
+      xAxis: {
+        type: 'value',
+        splitLine: { lineStyle: { color: borderLight, type: [4, 3] } },
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: textMuted, fontSize: 10 }
+      },
+      yAxis: {
+        type: 'category',
+        data: labels,
+        inverse: false,   // index 0 (terbanyak) ada di ATAS
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: text, fontSize: 11.5 }
+      },
+      series: [{
+        type: 'bar',
+        barWidth: '52%',
+        data: sortedCnts.map((v, si) => ({
+          value: v,
+          itemStyle: { color: colors[si], borderRadius: [0, 4, 4, 0] }
+        })),
+        label: {
+          show: true,
+          position: 'right',
+          color: textMuted,
+          fontSize: 11,
+          formatter: p => p.value > 0 ? `${p.value} akun` : ''
+        }
+      }]
+    };
+  };
+
+  el.classList.remove('skeleton', 'chart-skeleton');
+  chartInstance = echartsCore.init(el);
+  chartInstance.setOption(buildOption());
+
+  window.addEventListener('resize', () => chartInstance.resize());
+
+  const rebuild = () => {
+    chartInstance.dispose();
+    chartInstance = echartsCore.init(el);
+    chartInstance.setOption(buildOption());
+  };
+
+  new MutationObserver(rs => {
+    if (rs.some(r => r.attributeName === 'data-theme')) rebuild();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  document.documentElement.addEventListener('themechange', rebuild);
+}
+
+function updateChart() {
+  if (!chartInstance) return;
+  const { counts, omset } = hitungPerforma();
+  // Re-sort terbanyak → terendah saat update live
+  const sortedIdx  = counts.map((_, i) => i).sort((a, b) => counts[b] - counts[a]);
+  const sortedCnts = sortedIdx.map(i => counts[i]);
+  const lbTotal = document.getElementById('leaderboardTotal');
+  if (lbTotal) lbTotal.textContent = `Total: ${counts.reduce((s,v)=>s+v,0)} akun`;
+  chartInstance.setOption({
+    yAxis: { data: sortedIdx.map(i => `Staf ${i + 1}`) },
+    series: [{
+      data: sortedCnts.map((v, si) => ({
+        value: v,
+        itemStyle: { color: sortedIdx[si] < 4 ? '#22c55e' : '#3b82f6', borderRadius: [0, 4, 4, 0] }
+      }))
+    }]
+  });
+}
+
+// ── Simulasi Transaksi Sold Baru Masuk (Live Feed) ──────────────────────────
+let liveCounter = counter;
+
+function addNewTransaction() {
+  const si      = Math.floor(Math.random() * STORES.length);
+  const store   = STORES[si];
+  const items   = GAME_ITEMS[store] || [];
+  const stafIdx = Math.floor(Math.random() * 9);
+  const tier    = PRICE_TIERS[Math.floor(Math.random() * PRICE_TIERS.length)];
+  const item    = items[Math.floor(Math.random() * items.length)] || { nick: 'AkunGamePro', spek: 'Spek siap pakai' };
+  const bank    = Math.random() > 0.35 ? 'QRIS' : 'BRI';
+
+  const subPic  = SUB_PIC_OPTIONS[Math.floor(Math.random() * SUB_PIC_OPTIONS.length)];
+  const pic     = subPic === 'Live' ? HOST_LIVE_LIST[Math.floor(Math.random() * HOST_LIVE_LIST.length)] : (subPic === 'Saluran' ? 'PIC Saluran' : `PIC ${subPic}`);
+
+  TRANSAKSI.unshift({
+    id: `TRX-${store.slice(0, 2).toUpperCase()}-LV-${String(liveCounter).padStart(3, '0')}`,
+    store,
+    staf: STAF[stafIdx],
+    stafIdx,
+    subPic,
+    pic,
+    nickname: item.nick,
+    spek: item.spek,
+    hargaAkun: tier.akun,
+    hargaLaku: tier.laku,
+    bank,
+    waktu: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+    isNew: true
+  });
+
+  liveCounter++;
+  setTimeout(() => { if (TRANSAKSI[0]) TRANSAKSI[0].isNew = false; }, 700);
+}
+
+// ── Data Staf Info & Shift ──────────────────────────────────────────────────
+const STAF_INFO = [
+  { id: 1, nama: 'Staf Admin 1', shift: 'Pagi',  koord: 1 },
+  { id: 2, nama: 'Staf Admin 2', shift: 'Pagi',  koord: 1 },
+  { id: 3, nama: 'Staf Admin 3', shift: 'Pagi',  koord: 1 },
+  { id: 4, nama: 'Staf Admin 4', shift: 'Pagi',  koord: 1 },
+  { id: 5, nama: 'Staf Admin 5', shift: 'Siang', koord: 2 },
+  { id: 6, nama: 'Staf Admin 6', shift: 'Siang', koord: 2 },
+  { id: 7, nama: 'Staf Admin 7', shift: 'Siang', koord: 2 },
+  { id: 8, nama: 'Staf Admin 8', shift: 'Siang', koord: 2 },
+  { id: 9, nama: 'Staf Admin 9', shift: 'Siang', koord: 2 },
+];
+
+// ── Generate jadwal libur 14 hari (rotasi mingguan) ─────────────────────────
+function generateJadwalLibur() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  // offset hari libur per staf (hari ke-n dari hari ini)
+  const rotasi = [
+    { id: 1, offsets: [2, 9]  },
+    { id: 2, offsets: [3, 10] },
+    { id: 3, offsets: [4, 11] },
+    { id: 4, offsets: [5, 12] },
+    { id: 5, offsets: [0, 7]  },
+    { id: 6, offsets: [1, 8]  },
+    { id: 7, offsets: [3, 9]  },
+    { id: 8, offsets: [4, 10] },
+    { id: 9, offsets: [2, 11] },
+  ];
+  const list = [];
+  rotasi.forEach(({ id, offsets }) => {
+    const info = STAF_INFO.find(s => s.id === id);
+    offsets.forEach(offset => {
+      const d = new Date(today);
+      d.setDate(d.getDate() + offset);
+      list.push({
+        id, nama: info.nama, shift: info.shift, koord: info.koord,
+        tanggal: d.toISOString().slice(0, 10),
+        tglObj: new Date(d)
+      });
+    });
+  });
+  return list.sort((a, b) => a.tglObj - b.tglObj);
+}
+
+const JADWAL_LIBUR = generateJadwalLibur();
+let filterJadwal = ''; // '', 'Pagi', 'Siang'
+
+// ── Render Jadwal Libur ──────────────────────────────────────────────────────
+function renderJadwalLibur() {
+  const body = document.getElementById('jadwalBody');
+  const sub  = document.getElementById('jadwalSubtitle');
+  if (!body) return;
+
+  const filtered = filterJadwal
+    ? JADWAL_LIBUR.filter(j => j.shift === filterJadwal)
+    : JADWAL_LIBUR;
+
+  const hariNama = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  const todayStr    = new Date().toISOString().slice(0,10);
+  const tomorrowStr = new Date(Date.now() + 86400000).toISOString().slice(0,10);
+
+  body.innerHTML = filtered.length === 0
+    ? `<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:24px 0">Tidak ada jadwal libur</td></tr>`
+    : filtered.map(j => {
+        const d = new Date(j.tanggal + 'T00:00:00');
+        const tglFmt = `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+        const hariStr = hariNama[d.getDay()];
+        const shiftColor = j.shift === 'Pagi' ? '#f59e0b' : '#3b82f6';
+        const avatarColor = j.koord === 1 ? '#22c55e' : '#3b82f6';
+        let badge = '';
+        if (j.tanggal === todayStr)    badge = `<span style="font-size:10px;background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green);padding:1px 5px;border-radius:8px;margin-left:4px">Hari Ini</span>`;
+        else if (j.tanggal === tomorrowStr) badge = `<span style="font-size:10px;background:color-mix(in srgb,#f59e0b 15%,transparent);color:#f59e0b;padding:1px 5px;border-radius:8px;margin-left:4px">Besok</span>`;
+        return `<tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:7px">
+              <div class="cell-avatar" style="background:${avatarColor};width:22px;height:22px;font-size:10px;flex-shrink:0">${j.id}</div>
+              <span style="font-weight:600;font-size:12px">${j.nama}</span>
+            </div>
+          </td>
+          <td>
+            <span class="chip" style="background:color-mix(in srgb,${shiftColor} 15%,transparent);color:${shiftColor};font-weight:600;font-size:10.5px">${j.shift}</span>
+          </td>
+          <td style="font-size:12px;white-space:nowrap">${tglFmt}${badge}</td>
+          <td style="font-size:12px;color:var(--text-muted)">${hariStr}</td>
+        </tr>`;
+      }).join('');
+
+  if (sub) sub.textContent = `${filtered.length} jadwal libur · ${filterJadwal ? 'Shift ' + filterJadwal : 'Semua shift'}`;
+}
+
+// ── Tombol filter Jadwal Libur ───────────────────────────────────────────────
+function applyJadwalBtn() {
+  const inactive = 'font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--surface-2);color:var(--text-secondary);cursor:pointer;font-weight:600;transition:all .15s';
+  const activePagi  = 'font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid color-mix(in srgb,#f59e0b 35%,transparent);background:color-mix(in srgb,#f59e0b 15%,transparent);color:#f59e0b;cursor:pointer;font-weight:600;transition:all .15s';
+  const activeSiang = 'font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid color-mix(in srgb,#3b82f6 35%,transparent);background:color-mix(in srgb,#3b82f6 15%,transparent);color:#3b82f6;cursor:pointer;font-weight:600;transition:all .15s';
+  const activeSemua = 'font-size:11px;padding:3px 10px;border-radius:var(--radius-sm);border:1px solid color-mix(in srgb,var(--primary) 35%,transparent);background:color-mix(in srgb,var(--primary) 15%,transparent);color:var(--primary);cursor:pointer;font-weight:600;transition:all .15s';
+  document.getElementById('btnJadwalSemua').style.cssText = filterJadwal === ''     ? activeSemua : inactive;
+  document.getElementById('btnJadwalPagi').style.cssText  = filterJadwal === 'Pagi'  ? activePagi  : inactive;
+  document.getElementById('btnJadwalSiang').style.cssText = filterJadwal === 'Siang' ? activeSiang : inactive;
+}
+
+['btnJadwalSemua','btnJadwalPagi','btnJadwalSiang'].forEach(btnId => {
+  document.getElementById(btnId)?.addEventListener('click', () => {
+    filterJadwal = btnId === 'btnJadwalPagi' ? 'Pagi' : btnId === 'btnJadwalSiang' ? 'Siang' : '';
+    applyJadwalBtn();
+    renderJadwalLibur();
+  });
+});
+
+// ── Update Shift On-Duty Card ────────────────────────────────────────────────
+function updateShiftCard() {
+  const jam = new Date().getHours();
+  const isPagi = jam >= 8 && jam < 15;
+  const shiftNama  = isPagi ? 'Pagi'  : 'Siang';
+  const shiftJam   = isPagi ? '08:00–15:00' : '15:00–22:00';
+  const shiftCount = isPagi ? 4 : 5;
+  const nextJam    = isPagi ? '15:00' : '22:00';
+  const shiftStart = isPagi ? 8 : 15;
+  const pct = Math.min(100, Math.max(0, ((jam - shiftStart) / 7) * 100));
+  const el = (id) => document.getElementById(id);
+  if (el('kpiShiftLabel')) el('kpiShiftLabel').textContent = shiftNama;
+  if (el('kpiShiftBadge')) {
+    el('kpiShiftBadge').textContent = shiftJam;
+    el('kpiShiftBadge').style.background = isPagi
+      ? 'color-mix(in srgb,#f59e0b 15%,transparent)'
+      : 'color-mix(in srgb,#3b82f6 15%,transparent)';
+    el('kpiShiftBadge').style.color = isPagi ? '#f59e0b' : '#3b82f6';
+  }
+  if (el('kpiShiftSub'))  el('kpiShiftSub').textContent  = `${shiftCount} staf on-duty · Ganti shift ${nextJam} WIB`;
+  if (el('barShift'))     el('barShift').style.cssText   = `width:${pct}%;background:${isPagi ? '#f59e0b' : '#3b82f6'}`;
+}
+
+// ── Export CSV Sesuai Kolom Rekap Sold ──────────────────────────────────────
+document.getElementById('btnExportFeed').addEventListener('click', () => {
+  const rows = visibleRows();
+  const header = 'No,ID Transaksi,Store Game,Nickname,Spek,Harga Akun,Harga Laku,Sub PIC,PIC,Staf Admin,Bank,Waktu\n';
+  const body   = rows.map((r, i) =>
+    `${i + 1},${r.id},"${r.store}","${r.nickname}","${r.spek}",${r.hargaAkun},${r.hargaLaku},"${r.subPic}","${r.pic}",${r.staf},${r.bank},"${r.waktu}"`
+  ).join('\n');
+
+  const a = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(new Blob([header + body], { type: 'text/csv;charset=utf-8;' })),
+    download: `johen-rekap-sold-${new Date().toISOString().slice(0, 10)}.csv`
+  });
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+// ── Jam Realtime ───────────────────────────────────────────────────────────
+function updateClock() {
+  document.getElementById('clockDisplay').textContent =
+    new Date().toLocaleString('id-ID', {
+      weekday: 'short', day: '2-digit', month: 'short',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── Auto Refresh Setiap 15 Detik ───────────────────────────────────────────
+setInterval(() => {
+  addNewTransaction();
+  renderFeed();
+  updateChart();
+  updateShiftCard();
+}, 15000);
+
+// ── Style Animasi FadeIn ───────────────────────────────────────────────────
+const style = document.createElement('style');
+style.textContent = `@keyframes fadeIn { from { background: color-mix(in srgb, var(--primary) 14%, transparent); } to { background: transparent; } }`;
+document.head.appendChild(style);
+
+// ── Init Mount ─────────────────────────────────────────────────────────────
+renderFeed();
+mountChart();
+updateShiftCard();
+renderJadwalLibur();
+applyJadwalBtn();
+</script>
+
+</body>
+</html>

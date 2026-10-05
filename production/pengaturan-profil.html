@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengaturan Profil | Johen Gaming</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="pengaturan-profil" data-breadcrumb="Home > Pengaturan Profil">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Pengaturan Profil</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-layout">
+
+    <!-- ── Tab Nav Kiri ── -->
+    <aside class="settings-nav">
+      <a class="settings-nav-link active" href="#koordinator" data-tab="koordinator">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l6 2v4c0 4-3 7-6 8-3-1-6-4-6-8V3l6-2z"/></svg>
+        Profil Koordinator
+      </a>
+      <a class="settings-nav-link" href="#staf" data-tab="staf">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><circle cx="11" cy="5" r="2"/><path d="M1 14a5 5 0 0110 0M11 8a4 4 0 014 5"/></svg>
+        Profil Staf
+      </a>
+    </aside>
+
+    <!-- ── Konten Tab ── -->
+    <div class="settings-content">
+
+      <!-- ══ TAB 1: KOORDINATOR ══ -->
+      <section class="settings-section" id="koordinator">
+        <h2 class="settings-section-title">Profil Koordinator</h2>
+        <p class="settings-section-desc">Ubah nama dan target omset bulanan untuk setiap koordinator.</p>
+
+        <form id="formKoordinator" novalidate>
+
+          <!-- Koordinator 1 -->
+          <div style="margin-bottom:24px;padding:20px;border:1px solid var(--border-color);border-radius:var(--radius);background:var(--surface-2)">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0">K1</div>
+              <div>
+                <div style="font-weight:600;font-size:14px;color:var(--text)">Koordinator 1</div>
+                <div style="font-size:12px;color:var(--text-muted)">Membawahi Staf Admin 1 – 4</div>
+              </div>
+            </div>
+            <div class="settings-row">
+              <label for="namaKoord1">Nama Koordinator 1</label>
+              <input class="form-control" id="namaKoord1" type="text" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="settings-row">
+              <label for="targetKoord1">Target Omset Bulanan</label>
+              <div class="input-affix">
+                <span class="affix prefix">Rp</span>
+                <input class="form-control" id="targetKoord1" type="text" placeholder="0" inputmode="numeric">
+              </div>
+              <div class="settings-hint" id="terbilang1" style="min-height:16px;font-style:italic"></div>
+            </div>
+          </div>
+
+          <!-- Koordinator 2 -->
+          <div style="margin-bottom:24px;padding:20px;border:1px solid var(--border-color);border-radius:var(--radius);background:var(--surface-2)">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0">K2</div>
+              <div>
+                <div style="font-weight:600;font-size:14px;color:var(--text)">Koordinator 2</div>
+                <div style="font-size:12px;color:var(--text-muted)">Membawahi Staf Admin 5 – 9</div>
+              </div>
+            </div>
+            <div class="settings-row">
+              <label for="namaKoord2">Nama Koordinator 2</label>
+              <input class="form-control" id="namaKoord2" type="text" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="settings-row">
+              <label for="targetKoord2">Target Omset Bulanan</label>
+              <div class="input-affix">
+                <span class="affix prefix">Rp</span>
+                <input class="form-control" id="targetKoord2" type="text" placeholder="0" inputmode="numeric">
+              </div>
+              <div class="settings-hint" id="terbilang2" style="min-height:16px;font-style:italic"></div>
+            </div>
+          </div>
+
+          <div class="settings-actions">
+            <button type="reset" class="btn btn-outline">Reset</button>
+            <button type="submit" class="btn btn-primary" id="btnSimpanKoord">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Simpan Perubahan
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ══ TAB 2: STAF ══ -->
+      <section class="settings-section" id="staf" style="display:none">
+        <h2 class="settings-section-title">Profil Staf</h2>
+        <p class="settings-section-desc">Pilih staf, ubah nama asli, dan tentukan koordinator penanggung jawabnya.</p>
+
+        <form id="formStaf" novalidate>
+
+          <!-- Pilih Staf -->
+          <div class="settings-row">
+            <label for="pilihStaf">Pilih Staf Admin</label>
+            <select class="form-control" id="pilihStaf">
+              <option value="">— Pilih Staf —</option>
+              <option value="1">Staf Admin 1</option>
+              <option value="2">Staf Admin 2</option>
+              <option value="3">Staf Admin 3</option>
+              <option value="4">Staf Admin 4</option>
+              <option value="5">Staf Admin 5</option>
+              <option value="6">Staf Admin 6</option>
+              <option value="7">Staf Admin 7</option>
+              <option value="8">Staf Admin 8</option>
+              <option value="9">Staf Admin 9</option>
+            </select>
+          </div>
+
+          <!-- Panel edit — muncul setelah staf dipilih -->
+          <div id="panelEditStaf" style="display:none;padding:20px;border:1px solid var(--border-color);border-radius:var(--radius);background:var(--surface-2);margin-bottom:20px">
+
+            <!-- Avatar + label staf terpilih -->
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+              <div id="avatarStaf" style="width:44px;height:44px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0">1</div>
+              <div>
+                <div id="labelStafTerpilih" style="font-weight:600;font-size:14px;color:var(--text)">Staf Admin 1</div>
+                <div id="labelKoordStaf" style="font-size:12px;color:var(--text-muted)">—</div>
+              </div>
+            </div>
+
+            <div class="settings-row">
+              <label for="namaAsliStaf">Nama Asli</label>
+              <input class="form-control" id="namaAsliStaf" type="text" placeholder="Masukkan nama asli staf" required>
+              <div class="settings-hint">Nama ini akan ditampilkan di laporan dan dashboard koordinator.</div>
+            </div>
+
+            <div class="settings-row">
+              <label for="koordinatorStaf">Penanggung Jawab</label>
+              <select class="form-control" id="koordinatorStaf" required>
+                <option value="">— Pilih Koordinator —</option>
+                <option value="1">🟢 Koordinator 1</option>
+                <option value="2">🔵 Koordinator 2</option>
+              </select>
+            </div>
+
+            <div class="settings-row">
+              <label for="nomorHpStaf">Nomor HP / WhatsApp</label>
+              <input class="form-control" id="nomorHpStaf" type="tel" placeholder="Contoh: 08123456789">
+            </div>
+
+          </div>
+
+          <!-- Tabel ringkasan semua staf -->
+          <div class="card" style="margin-bottom:20px">
+            <div class="card-header">
+              <div class="card-title" style="font-size:13px">Ringkasan Data Staf</div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table" style="font-size:13px">
+                  <thead>
+                    <tr>
+                      <th>Staf</th>
+                      <th>Nama Asli</th>
+                      <th>Penanggung Jawab</th>
+                      <th>No. HP</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabelRingkasanStaf"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-actions">
+            <button type="reset" class="btn btn-outline" id="btnResetStaf">Reset</button>
+            <button type="submit" class="btn btn-primary" id="btnSimpanStaf">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Simpan Perubahan
+            </button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+import { showToast } from '/src/v4/toast.js';
+
+// ── State — disimpan di localStorage ─────────────────────────────────────
+const LS_KEY_KOORD = 'jg_koordinator';
+const LS_KEY_STAF  = 'jg_staf';
+
+const defaultKoord = {
+  k1: { nama: '', target: '' },
+  k2: { nama: '', target: '' }
+};
+
+const defaultStaf = Array.from({ length: 9 }, (_, i) => ({
+  id: i + 1,
+  namaAsli: '',
+  koordinator: i < 4 ? '1' : '2',
+  noHp: ''
+}));
+
+function loadKoord() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY_KOORD)) || defaultKoord; }
+  catch { return defaultKoord; }
+}
+function loadStaf() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY_STAF)) || defaultStaf; }
+  catch { return defaultStaf; }
+}
+function saveKoord(data) { localStorage.setItem(LS_KEY_KOORD, JSON.stringify(data)); }
+function saveStaf(data)  { localStorage.setItem(LS_KEY_STAF,  JSON.stringify(data)); }
+
+let dataKoord = loadKoord();
+let dataStaf  = loadStaf();
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+const tabLinks = document.querySelectorAll('.settings-nav-link[data-tab]');
+const sections = { koordinator: document.getElementById('koordinator'), staf: document.getElementById('staf') };
+
+tabLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const tab = link.dataset.tab;
+    tabLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    Object.values(sections).forEach(s => s.style.display = 'none');
+    sections[tab].style.display = 'block';
+  });
+});
+
+// ── Terbilang ─────────────────────────────────────────────────────────────
+function terbilang(n) {
+  const sat = ['','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan',
+    'sepuluh','sebelas','dua belas','tiga belas','empat belas','lima belas','enam belas',
+    'tujuh belas','delapan belas','sembilan belas'];
+  const pul = ['','','dua puluh','tiga puluh','empat puluh','lima puluh',
+    'enam puluh','tujuh puluh','delapan puluh','sembilan puluh'];
+  if (n < 20)   return sat[n];
+  if (n < 100)  return pul[Math.floor(n/10)] + (n%10 ? ' '+sat[n%10] : '');
+  if (n < 200)  return 'seratus'  + (n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 1000) return sat[Math.floor(n/100)]+' ratus'+(n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 2000) return 'seribu'   + (n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e6)  return terbilang(Math.floor(n/1000))+' ribu' +(n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e9)  return terbilang(Math.floor(n/1e6)) +' juta' +(n%1e6  ? ' '+terbilang(n%1e6)  : '');
+  return           terbilang(Math.floor(n/1e9))+' miliar'    +(n%1e9  ? ' '+terbilang(n%1e9)  : '');
+}
+
+function formatRp(n) { return n ? n.toLocaleString('id-ID') : ''; }
+
+function attachNominalInput(inputId, hintId) {
+  const el   = document.getElementById(inputId);
+  const hint = document.getElementById(hintId);
+  el.addEventListener('input', () => {
+    const raw = parseInt(el.value.replace(/\D/g, ''), 10) || 0;
+    el.value = raw ? formatRp(raw) : '';
+    hint.textContent = raw ? terbilang(raw) + ' rupiah' : '';
+  });
+}
+attachNominalInput('targetKoord1', 'terbilang1');
+attachNominalInput('targetKoord2', 'terbilang2');
+
+// ── Isi form koordinator dari state ──────────────────────────────────────
+function populateKoordForm() {
+  const k1raw = parseInt(String(dataKoord.k1.target).replace(/\D/g,''), 10) || 0;
+  const k2raw = parseInt(String(dataKoord.k2.target).replace(/\D/g,''), 10) || 0;
+  document.getElementById('namaKoord1').value   = dataKoord.k1.nama;
+  document.getElementById('targetKoord1').value = k1raw ? formatRp(k1raw) : '';
+  document.getElementById('terbilang1').textContent = k1raw ? terbilang(k1raw)+' rupiah' : '';
+  document.getElementById('namaKoord2').value   = dataKoord.k2.nama;
+  document.getElementById('targetKoord2').value = k2raw ? formatRp(k2raw) : '';
+  document.getElementById('terbilang2').textContent = k2raw ? terbilang(k2raw)+' rupiah' : '';
+}
+populateKoordForm();
+
+// ── Submit koordinator ────────────────────────────────────────────────────
+document.getElementById('formKoordinator').addEventListener('submit', async e => {
+  e.preventDefault();
+  const nama1   = document.getElementById('namaKoord1').value.trim();
+  const nama2   = document.getElementById('namaKoord2').value.trim();
+  const target1 = parseInt(document.getElementById('targetKoord1').value.replace(/\D/g,''), 10) || 0;
+  const target2 = parseInt(document.getElementById('targetKoord2').value.replace(/\D/g,''), 10) || 0;
+
+  if (!nama1 || !nama2) {
+    showToast('Nama kedua koordinator wajib diisi.', { variant: 'warning' });
+    return;
+  }
+
+  const payload = { k1: { nama: nama1, target: target1 }, k2: { nama: nama2, target: target2 } };
+
+  const ok = await kirimKeDatabase('koordinator', {
+    namaKoord1: nama1,
+    targetKoord1: target1,
+    targetKoord1Formatted: 'Rp ' + target1.toLocaleString('id-ID'),
+    namaKoord2: nama2,
+    targetKoord2: target2,
+    targetKoord2Formatted: 'Rp ' + target2.toLocaleString('id-ID'),
+  });
+  if (ok) {
+    dataKoord = payload;
+    saveKoord(dataKoord);
+    showToast('✅ Data koordinator berhasil disimpan!', { variant: 'success' });
+  }
+});
+
+// ── Staf: pilih staf → isi form ──────────────────────────────────────────
+const AVATAR_COLORS = ['var(--primary)','var(--azure)','var(--purple)','var(--yellow)',
+  'var(--green)','var(--blue)','var(--red)','var(--teal)','var(--orange)'];
+
+document.getElementById('pilihStaf').addEventListener('change', () => {
+  const id = parseInt(document.getElementById('pilihStaf').value, 10);
+  const panel = document.getElementById('panelEditStaf');
+  if (!id) { panel.style.display = 'none'; return; }
+
+  const staf = dataStaf.find(s => s.id === id);
+  document.getElementById('namaAsliStaf').value    = staf.namaAsli;
+  document.getElementById('koordinatorStaf').value = staf.koordinator;
+  document.getElementById('nomorHpStaf').value     = staf.noHp;
+
+  document.getElementById('avatarStaf').textContent        = String(id);
+  document.getElementById('avatarStaf').style.background   = AVATAR_COLORS[id - 1] || 'var(--primary)';
+  document.getElementById('labelStafTerpilih').textContent = `Staf Admin ${id}`;
+  document.getElementById('labelKoordStaf').textContent    =
+    staf.koordinator === '1' ? '🟢 Di bawah Koordinator 1' : '🔵 Di bawah Koordinator 2';
+
+  panel.style.display = 'block';
+});
+
+// Update label koordinator saat dropdown koordinator berubah
+document.getElementById('koordinatorStaf').addEventListener('change', () => {
+  const v = document.getElementById('koordinatorStaf').value;
+  document.getElementById('labelKoordStaf').textContent =
+    v === '1' ? '🟢 Di bawah Koordinator 1' :
+    v === '2' ? '🔵 Di bawah Koordinator 2' : '—';
+});
+
+// ── Render tabel ringkasan staf ───────────────────────────────────────────
+function renderTabelStaf() {
+  document.getElementById('tabelRingkasanStaf').innerHTML = dataStaf.map(s => `
+    <tr>
+      <td>
+        <div class="cell-customer">
+          <div class="cell-avatar" style="background:${AVATAR_COLORS[s.id-1]};width:26px;height:26px;font-size:11px;flex-shrink:0">${s.id}</div>
+          <span>Staf Admin ${s.id}</span>
+        </div>
+      </td>
+      <td style="color:${s.namaAsli ? 'var(--text)' : 'var(--text-muted)'}">
+        ${s.namaAsli || '<em>Belum diisi</em>'}
+      </td>
+      <td>
+        <span class="chip" style="background:${s.koordinator==='1'?'#22c55e':'#3b82f6'};color:#fff;font-size:11px">
+          Koordinator ${s.koordinator}
+        </span>
+      </td>
+      <td style="font-size:12px;color:var(--text-muted)">${s.noHp || '—'}</td>
+    </tr>
+  `).join('');
+}
+renderTabelStaf();
+
+// ── Submit staf ───────────────────────────────────────────────────────────
+document.getElementById('formStaf').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id    = parseInt(document.getElementById('pilihStaf').value, 10);
+  const nama  = document.getElementById('namaAsliStaf').value.trim();
+  const koord = document.getElementById('koordinatorStaf').value;
+  const hp    = document.getElementById('nomorHpStaf').value.trim();
+
+  if (!id)    { showToast('Pilih staf terlebih dahulu.', { variant: 'warning' }); return; }
+  if (!nama)  { showToast('Nama asli staf wajib diisi.', { variant: 'warning' }); return; }
+  if (!koord) { showToast('Pilih koordinator penanggung jawab.', { variant: 'warning' }); return; }
+
+  const payload = { id, namaAsli: nama, koordinator: koord, noHp: hp };
+
+  const ok = await kirimKeDatabase('staf', {
+    stafId:      id,
+    namaStaf:    `Staf Admin ${id}`,
+    namaAsli:    nama,
+    koordinator: `Koordinator ${koord}`,
+    noHp:        hp || '—',
+  });
+  if (ok) {
+    const idx = dataStaf.findIndex(s => s.id === id);
+    if (idx > -1) dataStaf[idx] = { ...dataStaf[idx], ...payload };
+    saveStaf(dataStaf);
+    renderTabelStaf();
+    showToast(`✅ Data Staf Admin ${id} berhasil disimpan!`, { variant: 'success' });
+  }
+});
+
+// Reset staf form
+document.getElementById('btnResetStaf').addEventListener('click', () => {
+  document.getElementById('pilihStaf').value = '';
+  document.getElementById('panelEditStaf').style.display = 'none';
+});
+
+// ── URL Google Apps Script Web App ───────────────────────────────────────
+// Deploy Apps Script sebagai Web App (Execute as: Me, Access: Anyone),
+// lalu tempel URL deployment di sini.
+const PROFIL_API_URL = ''; // ← tempel URL Apps Script di sini
+
+// ── Fungsi pengiriman ke Google Sheets ───────────────────────────────────
+async function kirimKeDatabase(tipe, payload) {
+  const data = {
+    tipe,                                                          // 'koordinator' | 'staf'
+    timestamp: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }),
+    ...payload
+  };
+
+  console.group(`[kirimKeDatabase] Payload (${tipe}):`);
+  console.table([data]);
+  console.groupEnd();
+
+  if (!PROFIL_API_URL) {
+    console.warn('[kirimKeDatabase] PROFIL_API_URL kosong — data hanya disimpan lokal.');
+    return true;
+  }
+
+  try {
+    await fetch(PROFIL_API_URL, {
+      method:  'POST',
+      mode:    'no-cors', // GAS tidak mengirim CORS header
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(data)
+    });
+    // mode no-cors → response opaque, anggap sukses jika tidak throw
+    return true;
+  } catch (err) {
+    console.error('[kirimKeDatabase] Fetch error:', err);
+    showToast('❌ Gagal mengirim ke Google Sheets. Periksa koneksi atau URL API.', { variant: 'danger' });
+    return false;
+  }
+}
+</script>
+
+</body>
+</html>

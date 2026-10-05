@@ -1,0 +1,65 @@
+// ============================================================
+//  Google Apps Script — Rekap Chat
+//  Salin seluruh kode ini ke Apps Script editor Google Sheets
+//  Sheet target : tab aktif (Rekap Chat)
+//  Header       : Baris 3
+//  Data masuk   : Baris 4 ke bawah
+// ============================================================
+
+function doPost(e) {
+  try {
+    // Terima baik JSON langsung maupun FormData dengan field 'data'
+    var raw  = (e.postData && e.postData.contents) ? e.postData.contents
+             : (e.parameter && e.parameter.data)   ? e.parameter.data
+             : '{}';
+    var data = JSON.parse(raw);
+    var sheet  = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    // Tentukan baris terakhir yang berisi data
+    // Baris 1-2 = judul/info, Baris 3 = header, Data mulai Baris 4
+    var lastRow = sheet.getLastRow();
+
+    // Baris tujuan penulisan data baru
+    var targetRow = (lastRow < 4) ? 4 : lastRow + 1;
+
+    // Nomor urut = posisi baris data (baris 4 = no 1, baris 5 = no 2, dst.)
+    // targetRow - 3 karena baris 1,2,3 bukan data
+    var nomorUrut = targetRow - 3;
+
+    // Tulis data ke baris target
+    // Urutan kolom: A=NO | B=TANGGAL | C=SHIFT | D=NO WA | E=STATUS
+    sheet.getRange(targetRow, 1, 1, 5).setValues([[
+      nomorUrut,
+      data.tanggal    || new Date().toLocaleDateString('id-ID'),
+      data.shift      || '',
+      data.no_wa      ? "'" + data.no_wa : '',
+      data.status     || ''
+    ]]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'ok', row: targetRow, no: nomorUrut }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ── Fungsi pengujian manual dari editor Apps Script ──────────────────────────
+// Klik Run pada fungsi ini untuk menguji tanpa deploy
+function testDoPost() {
+  var fakeEvent = {
+    postData: {
+      contents: JSON.stringify({
+        tanggal            : '01/07/2025',
+        shift              : 'Pagi',
+        no_wa              : '08123456789',
+        status             : 'Closing'
+      })
+    }
+  };
+  var result = doPost(fakeEvent);
+  Logger.log(result.getContent());
+}

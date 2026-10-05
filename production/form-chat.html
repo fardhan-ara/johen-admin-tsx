@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Rekap Chat | Johen Gaming</title>
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="form-chat" data-breadcrumb="Home > Form Rekap Chat">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Form Rekap Chat</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-8-4">
+
+    <!-- ── Form Utama ── -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Input Data Rekap Chat</div>
+          <div class="card-subtitle">Sistem hanya menyimpan 1 data per submit. Form otomatis mereset Status setelah submit berhasil.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="formChat" novalidate>
+
+          <!-- TANGGAL -->
+          <div class="form-group">
+            <label class="form-label" for="tanggal">Tanggal <span class="required">*</span></label>
+            <input type="date" id="tanggal" class="form-control" required>
+          </div>
+
+          <!-- SHIFT -->
+          <div class="form-group">
+            <label class="form-label" for="shift">Shift <span class="required">*</span></label>
+            <select id="shift" class="form-control" required>
+              <option value="">— Pilih Shift —</option>
+              <option value="Pagi">Pagi</option>
+              <option value="Malam">Malam</option>
+            </select>
+          </div>
+
+          <!-- NO WA -->
+          <div class="form-group">
+            <label class="form-label" for="noWa">No. WhatsApp <span class="required">*</span></label>
+            <input type="tel" id="noWa" class="form-control" placeholder="Contoh: 08123456789" required>
+            <div class="form-help">Nomor WA staf yang melakukan rekap chat. (Angka '0' di awal aman).</div>
+          </div>
+
+          <!-- STATUS -->
+          <div class="form-group">
+            <label class="form-label" for="status">Status <span class="required">*</span></label>
+            <select id="status" class="form-control" required>
+              <option value="">— Pilih Status —</option>
+              <option value="Closing">Closing</option>
+              <option value="Follow Up">Follow Up</option>
+              <option value="Ghosting">Ghosting</option>
+            </select>
+            <div class="form-help">Pilih status hasil akhir untuk interaksi chat ini.</div>
+          </div>
+
+          <div class="form-actions right">
+            <button type="reset" class="btn btn-secondary btn-sm" style="margin-right:10px">Reset Form</button>
+            <button type="submit" id="btnSubmitChat" class="btn btn-primary">
+              <svg id="btnIconChat" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span id="btnLabelChat">Submit Rekap Chat</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Kolom Kanan ── -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Akumulasi Sesi Ini -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">📊 Akumulasi Sesi Ini</div></div>
+        <div class="card-body">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+             <div>
+                <div style="font-size:12px;color:var(--text-secondary)">Total Lead</div>
+                <div style="font-size:24px;font-weight:700;color:var(--primary)" id="akumTotal">0</div>
+             </div>
+             <div style="text-align:right">
+                <div style="font-size:12px;color:var(--text-secondary)">Closing Rate</div>
+                <div style="font-size:24px;font-weight:700;color:var(--green,#27ae60)" id="akumRate">0%</div>
+             </div>
+          </div>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center">
+             <div style="background:var(--surface-2);padding:8px;border-radius:var(--radius)">
+                <div style="font-size:11px;color:var(--text-secondary)">Ghosting</div>
+                <div style="font-size:16px;font-weight:700;color:var(--danger,#e74c3c)" id="akumGhosting">0</div>
+             </div>
+             <div style="background:var(--surface-2);padding:8px;border-radius:var(--radius)">
+                <div style="font-size:11px;color:var(--text-secondary)">Follow Up</div>
+                <div style="font-size:16px;font-weight:700;color:var(--warning,#f39c12)" id="akumFollowUp">0</div>
+             </div>
+             <div style="background:var(--surface-2);padding:8px;border-radius:var(--radius)">
+                <div style="font-size:11px;color:var(--text-secondary)">Closing</div>
+                <div style="font-size:16px;font-weight:700;color:var(--green,#27ae60)" id="akumClosing">0</div>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Riwayat Submit Realtime -->
+      <div class="card" id="cardRiwayat">
+        <div class="card-header"><div class="card-title">📋 Rekap Terakhir</div></div>
+        <div class="card-body" style="padding:0">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:var(--surface-2)">
+                <th style="padding:6px 10px;text-align:left;color:var(--text-secondary);font-weight:600">No. WA</th>
+                <th style="padding:6px 10px;text-align:left;color:var(--text-secondary);font-weight:600">Shift</th>
+                <th style="padding:6px 10px;text-align:right;color:var(--text-secondary);font-weight:600">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyRiwayat">
+              <tr><td colspan="3" style="padding:16px;text-align:center;color:var(--text-muted)">Belum ada data disubmit.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+import { showToast } from '/src/v4/toast.js';
+
+// ── URL Google Apps Script — Rekap Chat ──────────────────────────────────
+const CHAT_API_URL = "https://script.google.com/macros/s/AKfycbz9XTu2U-jduswuC6w_ZHpZHOCKuIPli-f7ZzW4mZ7W6sWhW8xsg73y2eirH24APmC9UA/exec";
+
+const elTanggal  = document.getElementById('tanggal');
+const elShift    = document.getElementById('shift');
+const elNoWa     = document.getElementById('noWa');
+const elStatus   = document.getElementById('status');
+const btnSubmit  = document.getElementById('btnSubmitChat');
+const btnIcon    = document.getElementById('btnIconChat');
+
+elTanggal.value = new Date().toISOString().slice(0, 10);
+
+document.getElementById('formChat').addEventListener('reset', () => {
+  setTimeout(() => {
+    elTanggal.value = new Date().toISOString().slice(0, 10);
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+  }, 0);
+});
+
+const SPINNER  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;animation:spin .7s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>';
+const SAVE_SVG = btnIcon.outerHTML;
+
+function setLoading(on) {
+  btnSubmit.disabled = on;
+  btnSubmit.innerHTML = on
+    ? SPINNER + '<span>Mengirim...</span>'
+    : SAVE_SVG + '<span id="btnLabelChat">Submit Rekap Chat</span>';
+}
+
+// ── Akumulasi & Riwayat (Lokal) ──────────────────────────────────────────
+let akum = { Ghosting: 0, 'Follow Up': 0, Closing: 0 };
+const riwayat = [];
+
+function addData(snap) {
+  // Tambah akumulasi
+  if (akum[snap.status] !== undefined) {
+    akum[snap.status]++;
+  }
+  
+  const total = akum.Ghosting + akum['Follow Up'] + akum.Closing;
+  const rate  = total === 0 ? 0 : Math.round((akum.Closing / total) * 100);
+
+  document.getElementById('akumGhosting').textContent = akum.Ghosting;
+  document.getElementById('akumFollowUp').textContent = akum['Follow Up'];
+  document.getElementById('akumClosing').textContent  = akum.Closing;
+  document.getElementById('akumTotal').textContent    = total;
+  document.getElementById('akumRate').textContent     = rate + '%';
+
+  // Tambah riwayat
+  riwayat.unshift(snap);
+  const tbody = document.getElementById('tbodyRiwayat');
+  tbody.innerHTML = riwayat.slice(0, 10).map(r => {
+    const color = r.status === 'Closing' ? 'var(--green,#27ae60)'
+      : r.status === 'Follow Up' ? 'var(--warning,#f39c12)' : 'var(--danger,#e74c3c)';
+    return '<tr style="border-top:1px solid var(--border)">'
+      + '<td style="padding:8px 10px;font-weight:600">' + r.nowa + '</td>'
+      + '<td style="padding:8px 10px">' + r.shift + '</td>'
+      + '<td style="padding:8px 10px;text-align:right"><span style="background:' + color + ';color:#fff;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600">' + r.status + '</span></td>'
+      + '</tr>';
+  }).join('');
+}
+
+// ── submitChat() ──────────────────────────────────────────────────────────
+async function submitChat() {
+  const required = [elTanggal, elShift, elNoWa, elStatus];
+  let valid = true;
+  required.forEach(f => {
+    const empty = !f.value.trim();
+    f.classList.toggle('is-invalid', empty);
+    if (empty) valid = false;
+  });
+  if (!valid) { 
+    showToast('Harap isi semua field yang wajib diisi.', { variant: 'warning' }); 
+    return; 
+  }
+
+  const payload = {
+    tanggal: elTanggal.value,
+    shift:   elShift.value,
+    no_wa:   elNoWa.value.trim(),
+    status:  elStatus.value
+  };
+
+  const snap = { nowa: payload.no_wa, shift: payload.shift, status: payload.status };
+
+  const urlSudahDiisi = CHAT_API_URL && !CHAT_API_URL.includes('TEMPEL_LINK');
+  if (!urlSudahDiisi) {
+    showToast('Data tersimpan! (mode lokal)', { variant: 'success' });
+    addData(snap);
+    elStatus.value = ""; // otomatis reset field status saja untuk entry baru
+    return;
+  }
+
+  setLoading(true);
+  try {
+    await fetch(CHAT_API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+    showToast('Data Rekap Chat berhasil dikirim ke Google Spreadsheet!', { variant: 'success' });
+    addData(snap);
+    elStatus.value = ""; // kosongkan dropdown status untuk input data berikutnya, tanggal & no_wa biarkan utuh jika masih orang yg sama
+  } catch (err) {
+    showToast('Gagal mengirim. Periksa koneksi atau URL API.', { variant: 'danger' });
+  } finally {
+    setLoading(false);
+  }
+}
+
+document.getElementById('formChat').addEventListener('submit', e => { e.preventDefault(); submitChat(); });
+
+const s = document.createElement('style');
+s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(s);
+</script>
+
+</body>
+</html>

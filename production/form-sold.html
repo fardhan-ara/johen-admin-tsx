@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Rekap Sold | Johen Gaming</title>
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="form-sold" data-breadcrumb="Home > Form Rekap Sold">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Form Rekap Sold</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-8-4">
+
+    <!-- ── Form Utama ── -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Input Data Rekap Sold Akun Game</div>
+          <div class="card-subtitle">13 kolom sesuai sheet: NO · TGL MASUK · TGL TERJUAL · STATUS · NICKNAME · SPEK · BANK · HARGA AKUN · HARGA TERJUAL · SUB PIC · PIC · ADMIN · NO BUYER</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="formSold" novalidate>
+
+          <!-- STORE GAME — menentukan tab sheet tujuan -->
+          <div class="form-group">
+            <label class="form-label" for="storeGame">Store Game <span class="required">*</span></label>
+            <select id="storeGame" class="form-control" required>
+              <option value="">— Pilih Store Game —</option>
+              <option value="Free Fire">Free Fire</option>
+              <option value="Mobile Legend">Mobile Legend</option>
+              <option value="Johen PUBG">Johen PUBG</option>
+              <option value="Monkey PUBG">Monkey PUBG</option>
+              <option value="Valorant">Valorant</option>
+              <option value="EFootball">EFootball</option>
+              <option value="FC Mobile">FC Mobile</option>
+              <option value="Roblox">Roblox</option>
+            </select>
+            <div class="form-help">Data akan masuk ke tab sheet sesuai nama store ini.</div>
+          </div>
+
+          <!-- TANGGAL MASUK -->
+          <div class="form-group">
+            <label class="form-label" for="tanggalMasuk">Tanggal Masuk <span class="required">*</span></label>
+            <input type="date" id="tanggalMasuk" class="form-control" required>
+          </div>
+
+          <!-- TANGGAL TERJUAL -->
+          <div class="form-group">
+            <label class="form-label" for="tanggalTerjual">Tanggal Terjual</label>
+            <input type="date" id="tanggalTerjual" class="form-control">
+            <div class="form-help">Kosongkan jika akun belum terjual.</div>
+          </div>
+
+          <!-- STATUS — otomatis 'sold', ditampilkan sebagai info -->
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <div style="padding:8px 12px;background:var(--surface-2);border-radius:var(--radius);font-size:13px;display:flex;align-items:center;gap:8px">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0"></span>
+              <span style="font-weight:600;color:var(--green)">sold</span>
+              <span style="color:var(--text-muted);font-size:12px">— diisi otomatis oleh sistem</span>
+            </div>
+          </div>
+
+          <!-- NICKNAME -->
+          <div class="form-group">
+            <label class="form-label" for="nickname">Nickname Akun <span class="required">*</span></label>
+            <input type="text" id="nickname" class="form-control" placeholder="Nama karakter / username akun game" required>
+          </div>
+
+          <!-- SPEK -->
+          <div class="form-group">
+            <label class="form-label" for="spek">Spek Akun</label>
+            <input type="text" id="spek" class="form-control" placeholder="Contoh: Rank Diamond, Hero 120, Skin Rare">
+            <div class="form-help">Spesifikasi singkat akun (opsional).</div>
+          </div>
+
+          <!-- BANK -->
+          <div class="form-group">
+            <label class="form-label" for="bank">Bank <span class="required">*</span></label>
+            <select id="bank" class="form-control" required>
+              <option value="">— Pilih Bank —</option>
+              <option value="QRIS">QRIS</option>
+              <option value="BRI">BRI</option>
+            </select>
+          </div>
+
+          <!-- HARGA AKUN -->
+          <div class="form-group">
+            <label class="form-label" for="hargaAkun">Harga Akun (Rp) <span class="required">*</span></label>
+            <div class="input-affix">
+              <span class="affix prefix">Rp</span>
+              <input type="text" id="hargaAkun" class="form-control" placeholder="0" inputmode="numeric" autocomplete="off" required>
+            </div>
+            <div class="form-help" id="terbilangAkun" style="min-height:18px;font-style:italic"></div>
+          </div>
+
+          <!-- HARGA TERJUAL -->
+          <div class="form-group">
+            <label class="form-label" for="hargaTerjual">Harga Terjual (Rp)</label>
+            <div class="input-affix">
+              <span class="affix prefix">Rp</span>
+              <input type="text" id="hargaTerjual" class="form-control" placeholder="0" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="form-help" id="terbilangTerjual" style="min-height:18px;font-style:italic"></div>
+          </div>
+
+          <!-- SUB PIC -->
+          <div class="form-group">
+            <label class="form-label" for="subPic">Sub PIC</label>
+            <select id="subPic" class="form-control">
+              <option value="">— Pilih Sub PIC —</option>
+              <option value="Live">Live</option>
+              <option value="Saluran">Saluran</option>
+              <option value="Offline">Offline</option>
+              <option value="Influencer">Influencer</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- PIC (muncul hanya jika Sub PIC = Live) -->
+          <div class="form-group" id="picGroup" style="display:none">
+            <label class="form-label" for="pic">PIC — Host Live <span class="required">*</span></label>
+            <select id="pic" class="form-control">
+              <option value="">— Pilih Host Live —</option>
+              <option value="Host Live 1">Host Live 1</option>
+              <option value="Host Live 2">Host Live 2</option>
+              <option value="Host Live 3">Host Live 3</option>
+              <option value="Host Live 4">Host Live 4</option>
+              <option value="Host Live 5">Host Live 5</option>
+            </select>
+            <div class="form-help">Wajib diisi jika Sub PIC = Live.</div>
+          </div>
+
+          <!-- ADMIN (staf penginput) -->
+          <div class="form-group">
+            <label class="form-label" for="adminStaf">Admin (Staf Penginput) <span class="required">*</span></label>
+            <select id="adminStaf" class="form-control" required>
+              <option value="">— Pilih Nama Staf —</option>
+              <option value="Staf Admin 1">Staf Admin 1</option>
+              <option value="Staf Admin 2">Staf Admin 2</option>
+              <option value="Staf Admin 3">Staf Admin 3</option>
+              <option value="Staf Admin 4">Staf Admin 4</option>
+              <option value="Staf Admin 5">Staf Admin 5</option>
+              <option value="Staf Admin 6">Staf Admin 6</option>
+              <option value="Staf Admin 7">Staf Admin 7</option>
+              <option value="Staf Admin 8">Staf Admin 8</option>
+              <option value="Staf Admin 9">Staf Admin 9</option>
+            </select>
+          </div>
+
+          <!-- NOMOR BUYER -->
+          <div class="form-group">
+            <label class="form-label" for="nomorBuyer">Nomor Buyer</label>
+            <input type="tel" id="nomorBuyer" class="form-control" placeholder="Contoh: 08987654321">
+          </div>
+
+          <div class="form-actions right">
+            <button type="reset" class="btn btn-secondary btn-sm" style="margin-right:10px">Reset Form</button>
+            <button type="submit" id="btnSubmitSold" class="btn btn-primary">
+              <svg id="btnIconSold" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span id="btnLabelSold">Submit Rekap Sold</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Kolom Kanan ── -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Preview -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">Ringkasan Input</div></div>
+        <div class="card-body">
+          <dl style="margin:0;display:flex;flex-direction:column;gap:9px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Store</dt>
+              <dd id="prvStore" style="margin:0;font-weight:600;color:var(--text);text-align:right">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Tgl Masuk</dt>
+              <dd id="prvTglMasuk" style="margin:0;font-weight:600;color:var(--text)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Tgl Terjual</dt>
+              <dd id="prvTglTerjual" style="margin:0;font-weight:600;color:var(--text)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Nickname</dt>
+              <dd id="prvNickname" style="margin:0;font-weight:600;color:var(--text);word-break:break-all;text-align:right">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Harga Akun</dt>
+              <dd id="prvHargaAkun" style="margin:0;font-weight:700;color:var(--primary)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Harga Terjual</dt>
+              <dd id="prvHargaTerjual" style="margin:0;font-weight:700;color:var(--green)">—</dd>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:8px">
+              <dt style="color:var(--text-secondary);font-weight:400;white-space:nowrap">Admin</dt>
+              <dd id="prvAdmin" style="margin:0;font-weight:600;color:var(--text)">—</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Info Kolom Sheet -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">Urutan Kolom Sheet</div></div>
+        <div class="card-body">
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;font-size:12px">
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">A</span><span>NO (otomatis)</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">B</span><span>TANGGAL MASUK</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">C</span><span>TANGGAL TERJUAL</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--green);width:18px">D</span><span>STATUS <em style="color:var(--text-muted)">(auto: sold)</em></span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">E</span><span>NICKNAME</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">F</span><span>SPEK</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">G</span><span>BANK</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">H</span><span>HARGA AKUN</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">I</span><span>HARGA TERJUAL</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">J</span><span>SUB PIC</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">K</span><span>PIC</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">L</span><span>ADMIN</span></li>
+            <li style="display:flex;gap:8px"><span style="font-weight:700;color:var(--primary);width:18px">M</span><span>NOMOR BUYER</span></li>
+          </ul>
+          <div style="margin-top:10px;padding:8px 10px;background:var(--surface-2);border-radius:var(--radius);font-size:12px;color:var(--text-secondary)">
+            Baris 1–2: rumus kalkulasi · Header: Baris 3 · Data: Baris 4+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+import { showToast } from '/src/v4/toast.js';
+
+// ── URL Google Apps Script — Rekap Sold ──────────────────────────────────
+// Tempel URL deployment Apps Script Rekap Sold Anda di sini.
+const SOLD_API_URL = "https://script.google.com/macros/s/AKfycbzyl2RNlOdxUk95V3mLoojCyh-dZ035_DRGmHGAcE5-Xq156cIfXCl1ArrcnpRcJ2Q/exec";
+
+// ── Refs ──────────────────────────────────────────────────────────────────
+const elStore        = document.getElementById('storeGame');
+const elTglMasuk     = document.getElementById('tanggalMasuk');
+const elTglTerjual   = document.getElementById('tanggalTerjual');
+const elNickname     = document.getElementById('nickname');
+const elSpek         = document.getElementById('spek');
+const elBank         = document.getElementById('bank');
+const elHargaAkun    = document.getElementById('hargaAkun');
+const elHargaTerjual = document.getElementById('hargaTerjual');
+const elSubPic       = document.getElementById('subPic');
+const elPic          = document.getElementById('pic');
+const elAdmin        = document.getElementById('adminStaf');
+const elNomorBuyer   = document.getElementById('nomorBuyer');
+const btnSubmit      = document.getElementById('btnSubmitSold');
+const btnIcon        = document.getElementById('btnIconSold');
+
+// ── Conditional PIC (hanya tampil jika Sub PIC = Live) ────────────────────
+const picGroup = document.getElementById('picGroup');
+elSubPic.addEventListener('change', () => {
+  const isLive = elSubPic.value === 'Live';
+  picGroup.style.display = isLive ? '' : 'none';
+  elPic.required = isLive;
+  if (!isLive) elPic.value = '';
+});
+
+// Set default tanggal masuk hari ini
+elTglMasuk.value = new Date().toISOString().slice(0, 10);
+
+// ── Format Rupiah + Terbilang ─────────────────────────────────────────────
+function formatRp(n) { return n ? n.toLocaleString('id-ID') : ''; }
+
+function terbilang(n) {
+  const sat = ['','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan',
+    'sepuluh','sebelas','dua belas','tiga belas','empat belas','lima belas','enam belas',
+    'tujuh belas','delapan belas','sembilan belas'];
+  const pul = ['','','dua puluh','tiga puluh','empat puluh','lima puluh',
+    'enam puluh','tujuh puluh','delapan puluh','sembilan puluh'];
+  if (n < 20)   return sat[n];
+  if (n < 100)  return pul[Math.floor(n/10)] + (n%10 ? ' '+sat[n%10] : '');
+  if (n < 200)  return 'seratus'  + (n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 1000) return sat[Math.floor(n/100)]+' ratus'+(n%100  ? ' '+terbilang(n%100)  : '');
+  if (n < 2000) return 'seribu'   + (n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e6)  return terbilang(Math.floor(n/1000))+' ribu' +(n%1000 ? ' '+terbilang(n%1000) : '');
+  if (n < 1e9)  return terbilang(Math.floor(n/1e6)) +' juta' +(n%1e6  ? ' '+terbilang(n%1e6)  : '');
+  return           terbilang(Math.floor(n/1e9))+' miliar'    +(n%1e9  ? ' '+terbilang(n%1e9)  : '');
+}
+
+function attachNominal(inputEl, hintId, prvId) {
+  inputEl.addEventListener('input', () => {
+    const raw = parseInt(inputEl.value.replace(/\D/g, ''), 10) || 0;
+    inputEl.value = raw ? formatRp(raw) : '';
+    document.getElementById(hintId).textContent = raw ? terbilang(raw) + ' rupiah' : '';
+    document.getElementById(prvId).textContent  = raw ? 'Rp ' + formatRp(raw) : '—';
+  });
+}
+attachNominal(elHargaAkun,    'terbilangAkun',    'prvHargaAkun');
+attachNominal(elHargaTerjual, 'terbilangTerjual', 'prvHargaTerjual');
+
+// ── Live preview ──────────────────────────────────────────────────────────
+elStore.addEventListener('change',      () => { document.getElementById('prvStore').textContent      = elStore.value      || '—'; });
+elTglMasuk.addEventListener('change',   () => { document.getElementById('prvTglMasuk').textContent   = elTglMasuk.value   || '—'; });
+elTglTerjual.addEventListener('change', () => { document.getElementById('prvTglTerjual').textContent = elTglTerjual.value || '—'; });
+elNickname.addEventListener('input',    () => { document.getElementById('prvNickname').textContent   = elNickname.value.trim() || '—'; });
+elAdmin.addEventListener('change',      () => { document.getElementById('prvAdmin').textContent      = elAdmin.value      || '—'; });
+
+// Init preview
+document.getElementById('prvTglMasuk').textContent = elTglMasuk.value;
+
+// ── Reset ─────────────────────────────────────────────────────────────────
+document.getElementById('formSold').addEventListener('reset', () => {
+  setTimeout(() => {
+    elTglMasuk.value = new Date().toISOString().slice(0, 10);
+    picGroup.style.display = 'none';
+    elPic.required = false;
+    ['prvStore','prvTglMasuk','prvTglTerjual','prvNickname','prvHargaAkun','prvHargaTerjual','prvAdmin']
+      .forEach(id => { document.getElementById(id).textContent = id === 'prvTglMasuk' ? elTglMasuk.value : '—'; });
+    document.getElementById('terbilangAkun').textContent    = '';
+    document.getElementById('terbilangTerjual').textContent = '';
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+  }, 0);
+});
+
+// ── Loading state ─────────────────────────────────────────────────────────
+const SPINNER  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;animation:spin .7s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`;
+const SAVE_SVG = btnIcon.outerHTML;
+
+function setLoading(on) {
+  btnSubmit.disabled = on;
+  btnSubmit.innerHTML = on
+    ? SPINNER + '<span>Mengirim...</span>'
+    : SAVE_SVG + '<span id="btnLabelSold">Submit Rekap Sold</span>';
+}
+
+// ── submitSold() ──────────────────────────────────────────────────────────
+async function submitSold() {
+  const required = [elStore, elTglMasuk, elNickname, elHargaAkun, elAdmin];
+  let valid = true;
+  required.forEach(f => {
+    const empty = !f.value.trim();
+    f.classList.toggle('is-invalid', empty);
+    if (empty) valid = false;
+  });
+  if (!valid) {
+    showToast('Harap isi semua field yang wajib diisi.', { variant: 'warning' });
+    return;
+  }
+
+  const hargaAkunRaw    = parseInt(elHargaAkun.value.replace(/\D/g, ''), 10)    || 0;
+  const hargaTerjualRaw = parseInt(elHargaTerjual.value.replace(/\D/g, ''), 10) || 0;
+
+  const payload = {
+    store_game:       elStore.value,
+    tanggal_masuk:    elTglMasuk.value,
+    tanggal_terjual:  elTglTerjual.value,
+    // status 'sold' diisi otomatis oleh Apps Script (kolom D)
+    nickname:         elNickname.value.trim(),
+    spek:             elSpek.value.trim(),
+    bank:             elBank.value,
+    harga_akun:       hargaAkunRaw,
+    harga_terjual:    hargaTerjualRaw,
+    sub_pic:          elSubPic.value.trim(),
+    pic:              elPic.value,
+    admin:            elAdmin.value,
+    nomor_buyer:      elNomorBuyer.value.trim()
+  };
+
+  console.group('[submitSold] Payload:');
+  console.table([payload]);
+  console.groupEnd();
+
+  const urlSudahDiisi = SOLD_API_URL && !SOLD_API_URL.includes('TEMPEL_LINK');
+  if (!urlSudahDiisi) {
+    console.warn('[submitSold] SOLD_API_URL belum diisi — mode lokal.');
+    showToast('✅ Data tersimpan! (mode lokal — tempel URL Apps Script di SOLD_API_URL)', { variant: 'success' });
+    document.getElementById('formSold').reset();
+    return;
+  }
+
+  setLoading(true);
+  try {
+    // Kirim JSON murni tanpa Content-Type header — GAS membaca e.postData.contents
+    await fetch(SOLD_API_URL, {
+      method: 'POST',
+      mode:   'no-cors',
+      body:   JSON.stringify(payload)
+    });
+    showToast(`✅ Data Rekap Sold (${elStore.value}) berhasil dikirim ke Google Spreadsheet!`, { variant: 'success' });
+    document.getElementById('formSold').reset();
+  } catch (err) {
+    console.error('[submitSold] Error:', err);
+    showToast('❌ Gagal mengirim. Periksa koneksi atau URL API.', { variant: 'danger' });
+  } finally {
+    setLoading(false);
+  }
+}
+
+document.getElementById('formSold').addEventListener('submit', e => {
+  e.preventDefault();
+  submitSold();
+});
+
+// Spinner animation
+const s = document.createElement('style');
+s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(s);
+</script>
+
+</body>
+</html>

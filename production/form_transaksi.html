@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Input Transaksi | Johen Gaming</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="form-transaksi" data-breadcrumb="Home > Form Input Transaksi">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">Johen Gaming</div>
+        <h1 class="page-title">Form Input Transaksi</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-8-4">
+
+    <!-- ── Card Form Utama ── -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Input Data Transaksi Akun Game</div>
+          <div class="card-subtitle">Isi semua field dengan benar sebelum menyimpan.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form id="formTransaksi" novalidate>
+
+          <!-- Nama Staf -->
+          <div class="form-group">
+            <label class="form-label" for="namaStaf">Nama Staf <span class="required">*</span></label>
+            <select id="namaStaf" class="form-control" required>
+              <option value="">— Pilih Staf —</option>
+              <option value="1">Staf Admin 1</option>
+              <option value="2">Staf Admin 2</option>
+              <option value="3">Staf Admin 3</option>
+              <option value="4">Staf Admin 4</option>
+              <option value="5">Staf Admin 5</option>
+              <option value="6">Staf Admin 6</option>
+              <option value="7">Staf Admin 7</option>
+              <option value="8">Staf Admin 8</option>
+              <option value="9">Staf Admin 9</option>
+            </select>
+            <div class="form-help" id="infoKoordinator" style="display:none"></div>
+          </div>
+
+          <!-- Store Game -->
+          <div class="form-group">
+            <label class="form-label" for="storeGame">Store Game <span class="required">*</span></label>
+            <select id="storeGame" class="form-control" required>
+              <option value="">— Pilih Store —</option>
+              <option value="store-a">Store A</option>
+              <option value="store-b">Store B</option>
+              <option value="store-c">Store C</option>
+              <option value="store-d">Store D</option>
+              <option value="store-e">Store E</option>
+              <option value="store-f">Store F</option>
+              <option value="store-g">Store G</option>
+            </select>
+          </div>
+
+          <!-- ID Transaksi -->
+          <div class="form-group">
+            <label class="form-label" for="idTransaksi">ID Transaksi Akun Game <span class="required">*</span></label>
+            <input type="text" id="idTransaksi" class="form-control" placeholder="Contoh: TRX-20250601-001" required>
+            <div class="form-help">Masukkan ID unik transaksi dari sistem akun game.</div>
+          </div>
+
+          <!-- Nominal Transaksi -->
+          <div class="form-group">
+            <label class="form-label" for="nominal">Nominal Transaksi <span class="required">*</span></label>
+            <div class="input-affix">
+              <span class="affix prefix">Rp</span>
+              <input type="text" id="nominal" class="form-control" placeholder="0" inputmode="numeric" required>
+            </div>
+            <div class="form-help" id="nominalTerbilang" style="min-height:18px"></div>
+          </div>
+
+          <!-- Status Akun -->
+          <div class="form-group">
+            <label class="form-label" for="statusAkun">Status Akun <span class="required">*</span></label>
+            <select id="statusAkun" class="form-control" required>
+              <option value="">— Pilih Status —</option>
+              <option value="checking">Checking</option>
+              <option value="secured">Secured</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+
+          <div class="form-actions right">
+            <button type="reset" class="btn btn-outline">Reset</button>
+            <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Panel Kanan ── -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Ringkasan Input -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">Ringkasan Input</div></div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-secondary)">Staf</span>
+              <strong id="previewStaf" style="color:var(--text)">—</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-secondary)">Store</span>
+              <strong id="previewStore" style="color:var(--text)">—</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-secondary)">ID Transaksi</span>
+              <strong id="previewId" style="color:var(--text);word-break:break-all;text-align:right;max-width:120px">—</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span style="color:var(--text-secondary)">Nominal</span>
+              <strong id="previewNominal" style="color:var(--primary)">—</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="color:var(--text-secondary)">Status</span>
+              <span id="previewStatus" class="badge" style="background:var(--surface-2);color:var(--text-secondary)">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panduan -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">Panduan Pengisian</div></div>
+        <div class="card-body">
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:12.5px;color:var(--text-secondary);line-height:1.5">
+            <li><strong style="color:var(--text)">Checking</strong> — Akun sedang dalam proses verifikasi.</li>
+            <li><strong style="color:var(--text)">Secured</strong> — Akun telah diamankan, menunggu konfirmasi.</li>
+            <li><strong style="color:var(--text)">Done</strong> — Transaksi selesai dan akun telah diserahkan.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script type="module">
+// ── Koordinator info ──
+const koordinatorInfo = {
+  1: 'Koordinator 1', 2: 'Koordinator 1', 3: 'Koordinator 1', 4: 'Koordinator 1',
+  5: 'Koordinator 2', 6: 'Koordinator 2', 7: 'Koordinator 2', 8: 'Koordinator 2', 9: 'Koordinator 2'
+};
+
+const namaStafEl    = document.getElementById('namaStaf');
+const infoKoord     = document.getElementById('infoKoordinator');
+const storeEl       = document.getElementById('storeGame');
+const idEl          = document.getElementById('idTransaksi');
+const nominalEl     = document.getElementById('nominal');
+const nominalTerb   = document.getElementById('nominalTerbilang');
+const statusEl      = document.getElementById('statusAkun');
+
+const previewStaf    = document.getElementById('previewStaf');
+const previewStore   = document.getElementById('previewStore');
+const previewId      = document.getElementById('previewId');
+const previewNominal = document.getElementById('previewNominal');
+const previewStatus  = document.getElementById('previewStatus');
+
+// Staf → koordinator
+namaStafEl.addEventListener('change', () => {
+  const v = parseInt(namaStafEl.value, 10);
+  if (v) {
+    const k = koordinatorInfo[v];
+    infoKoord.textContent = `Staf ini di bawah tanggung jawab ${k}.`;
+    infoKoord.style.display = 'block';
+  } else {
+    infoKoord.style.display = 'none';
+  }
+  previewStaf.textContent = namaStafEl.options[namaStafEl.selectedIndex].text || '—';
+});
+
+// Store preview
+storeEl.addEventListener('change', () => {
+  previewStore.textContent = storeEl.options[storeEl.selectedIndex].text || '—';
+});
+
+// ID preview
+idEl.addEventListener('input', () => {
+  previewId.textContent = idEl.value.trim() || '—';
+});
+
+// Nominal — format Rupiah
+const formatRupiah = (n) => n ? 'Rp ' + n.toLocaleString('id-ID') : '—';
+
+nominalEl.addEventListener('input', () => {
+  const raw = nominalEl.value.replace(/\D/g, '');
+  const num = parseInt(raw, 10) || 0;
+  // format dengan titik ribuan di input
+  nominalEl.value = num ? num.toLocaleString('id-ID') : '';
+  // terbilang sederhana (ratusan juta ke bawah)
+  nominalTerb.textContent = num ? terbilang(num) : '';
+  previewNominal.textContent = num ? formatRupiah(num) : '—';
+});
+
+// Status → badge warna
+const statusColor = { checking: 'var(--yellow)', secured: 'var(--blue)', done: 'var(--green)' };
+statusEl.addEventListener('change', () => {
+  const v = statusEl.value;
+  const label = statusEl.options[statusEl.selectedIndex].text;
+  previewStatus.textContent = v ? label : '—';
+  previewStatus.style.background = v ? statusColor[v] : 'var(--surface-2)';
+  previewStatus.style.color = v ? '#fff' : 'var(--text-secondary)';
+});
+
+// Reset preview
+document.getElementById('formTransaksi').addEventListener('reset', () => {
+  infoKoord.style.display = 'none';
+  nominalTerb.textContent = '';
+  previewStaf.textContent = previewStore.textContent = previewId.textContent = '—';
+  previewNominal.textContent = '—';
+  previewStatus.textContent = '—';
+  previewStatus.style.background = 'var(--surface-2)';
+  previewStatus.style.color = 'var(--text-secondary)';
+});
+
+// Submit sederhana
+document.getElementById('formTransaksi').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fields = [namaStafEl, storeEl, idEl, nominalEl, statusEl];
+  let valid = true;
+  fields.forEach((f) => {
+    const empty = !f.value.trim();
+    f.classList.toggle('is-invalid', empty);
+    if (empty) valid = false;
+  });
+  if (!valid) return;
+  // Tampilkan toast jika tersedia, fallback ke alert
+  if (window.showToast) {
+    window.showToast('Transaksi berhasil disimpan!', { variant: 'success' });
+  } else {
+    alert('Transaksi berhasil disimpan!');
+  }
+  document.getElementById('formTransaksi').reset();
+});
+
+// ── Terbilang (sampai ratusan miliar) ──
+function terbilang(n) {
+  const satuan = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan',
+    'sepuluh', 'sebelas', 'dua belas', 'tiga belas', 'empat belas', 'lima belas', 'enam belas',
+    'tujuh belas', 'delapan belas', 'sembilan belas'];
+  if (n < 20) return satuan[n];
+  if (n < 100) return satuan[Math.floor(n / 10) * 10 > 0 ? 0 : 0] + (['', '', 'dua puluh', 'tiga puluh', 'empat puluh', 'lima puluh', 'enam puluh', 'tujuh puluh', 'delapan puluh', 'sembilan puluh'][Math.floor(n / 10)]) + (n % 10 ? ' ' + satuan[n % 10] : '');
+  if (n < 200) return 'seratus' + (n % 100 ? ' ' + terbilang(n % 100) : '');
+  if (n < 1000) return satuan[Math.floor(n / 100)] + ' ratus' + (n % 100 ? ' ' + terbilang(n % 100) : '');
+  if (n < 2000) return 'seribu' + (n % 1000 ? ' ' + terbilang(n % 1000) : '');
+  if (n < 1e6) return terbilang(Math.floor(n / 1000)) + ' ribu' + (n % 1000 ? ' ' + terbilang(n % 1000) : '');
+  if (n < 1e9) return terbilang(Math.floor(n / 1e6)) + ' juta' + (n % 1e6 ? ' ' + terbilang(n % 1e6) : '');
+  return terbilang(Math.floor(n / 1e9)) + ' miliar' + (n % 1e9 ? ' ' + terbilang(n % 1e9) : '');
+}
+</script>
+
+</body>
+</html>
